@@ -7,11 +7,19 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import LoginScreen from '../screens/LoginScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
   default: {},
 });
+
+const LoginStack = createStackNavigator(
+  {
+    Login: LoginScreen,
+  },
+  config
+);
 
 const HomeStack = createStackNavigator(
   {
@@ -69,6 +77,7 @@ SettingsStack.navigationOptions = {
 SettingsStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
+  LoginStack,
   HomeStack,
   LinksStack,
   SettingsStack,

@@ -4,8 +4,11 @@ import * as Font from 'expo-font';
 import React, { useState } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { createStackNavigator } from 'react-navigation-stack';
 
-import AppNavigator from './navigation/AppNavigator';
+import LoginScreen from './screens/LoginScreen';
+import RegisterScreen from './screens/RegisterScreen';
+import WelcomeScreen from './screens/WelcomeScreen';
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -22,17 +25,39 @@ export default function App(props) {
     return (
       <View style={styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <AppNavigator />
+        <WelcomeScreen />
       </View>
     );
   }
 }
+
+const config = Platform.select({
+  web: { headerMode: 'screen' },
+  default: {},
+});
+
+const NavStack = createStackNavigator(
+  {
+    Login: LoginScreen,
+  },
+  config
+);
+
+NavStack.navigationOptions = {
+  tabBarLabel: 'Links',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
+  ),
+};
+
+NavStack.path = '';
 
 async function loadResourcesAsync() {
   await Promise.all([
     Asset.loadAsync([
       require('./assets/images/robot-dev.png'),
       require('./assets/images/robot-prod.png'),
+      require('./assets/images/slo-background.jpg'),
     ]),
     Font.loadAsync({
       // This is the font that we are using for our tab bar
