@@ -10,13 +10,9 @@ import { Ionicons } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
 import Constants from 'expo-constants';
 
-
-
 const data1 = [{name: "Bishop's Peak", diff:"4", loc: "Bishops", rate: "5/5"},
 				{name: "Madonna", diff:"3", loc: "Madonna", rate: "4/5"},
 				{name: "Cal Poly P", diff:"1", loc: "Behind the Red Bricks", rate: "3/5"}];
-
-
 
 function Item({ name, rate, loc, diff, selected, onSelect }) {
   return (
