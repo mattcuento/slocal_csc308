@@ -13,6 +13,7 @@ var profileRouter = require('./routes/profile');
 var mapViewRouter = require('./routes/map');
 var listViewRouter = require('./routes/list');
 var signInRouter = require('./routes/signIn');
+var registerRouter = require('./routes/register');
 //README this variable is the express app itself
 var app = express();
 
@@ -30,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', signInRouter);
 app.use('/tracker', trackerRouter);
+app.use('/register', registerRouter);
 app.use("/profile", profileRouter);
 app.use("/list", listViewRouter);
 app.use("/map", mapViewRouter);
