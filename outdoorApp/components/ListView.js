@@ -14,6 +14,27 @@ const data1 = [{name: "Bishop's Peak", diff:"4", loc: "Bishops", rate: "5/5"},
 				{name: "Madonna", diff:"3", loc: "Madonna", rate: "4/5"},
 				{name: "Cal Poly P", diff:"1", loc: "Behind the Red Bricks", rate: "3/5"}];
 
+constructor(props) {
+	super(props);
+	this.state = { isLoading: true }
+}
+
+componentDidMount() {
+	fetch('/list')
+	.then((response) => response.json())
+	.then((responseJson)) => {
+		this.setState({
+			isLoading: false,
+			dataSource: responseJson
+		}, function() {
+		
+		});
+	})
+	.catch((error) => {
+		console.log('List View Data Error.');
+	});
+}
+
 function Item({ name, rate, loc, diff, selected, onSelect }) {
   return (
     <TouchableOpacity
@@ -47,7 +68,7 @@ export default function ListView() {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={data1}
+        data={this.state.dataSource}
         renderItem={({ item }) => (
           <Item
             name={item.name}
