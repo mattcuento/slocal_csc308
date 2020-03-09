@@ -2,6 +2,7 @@ import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+
 import { StyleSheet } from 'react-native';
 
 import TabBarIcon from '../components/TabBarIcon';
@@ -48,6 +49,7 @@ const SearchStack = createStackNavigator(
   },
   config
 );
+
 
 SearchStack.navigationOptions = {
   tabBarLabel: 'Search',
