@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     fontWeight: "300"
   },
   credentialStyle: {
-    color: "white",
+    color: "black",
     borderBottomColor: "darkcyan",
     borderBottomWidth: 2,
     height: 30,
