@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { withNavigation } from 'react-navigation';
 import { 
   Text,
   TouchableHighlight,
@@ -13,13 +14,13 @@ import {
   ImageBackground
 } from 'react-native';
 
-export default class RegisterBackground extends Component {
+export class RegisterBackground extends Component {
   render() {
     return (
         <ImageBackground
           style={styles.imageStyle}
           source={require('../assets/images/slo-background.jpg')}>
-          { <Register/> }
+          { <Register navigation={this.props.navigation}/> }
         </ImageBackground>
     );
   }
@@ -37,7 +38,7 @@ export class Register extends Component {
             <PasswordEntry text='Password:'/>
             <PasswordEntry text='Re-enter password:'/>
           </ScrollView>
-            <LoginButton />
+            <LoginButton navigation={this.props.navigation}/>
         </View>
       </KeyboardAvoidingView>
     );
@@ -86,7 +87,8 @@ export class LoginButton extends Component {
   render() {
     return (
       <View style={styles.buttonWrapper}>
-        <TouchableHighlight style={styles.buttonStyle}>
+        <TouchableHighlight style={styles.buttonStyle}
+          onPress={() => this.props.navigation.navigate('Hike')}>
           <Icon
             name="angle-right"
             color="white"
@@ -167,3 +169,5 @@ const styles = StyleSheet.create({
     height: undefined
   }
 });
+
+export default withNavigation(RegisterBackground);
