@@ -88,7 +88,7 @@ export class LoginButton extends Component {
     return (
       <View style={styles.buttonWrapper}>
         <TouchableHighlight style={styles.buttonStyle}
-          onPress={() => this.props.navigation.navigate('Hike')}>
+          onPress={() => this.props.navigation.navigate('SearchStack')}>
           <Icon
             name="angle-right"
             color="white"
