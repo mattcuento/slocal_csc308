@@ -4,24 +4,47 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var testAPIRouter = require('./routes/testAPI');
+var cors = require('cors');
+
+//TO START THE APP, WRTIE 'npm start' ANYWHERE UNDER THE 'api' FOLDER AND GO TO http://localhost::9000
+//README here are all the variables that contain the routers to different pages, for my example were gonna look at the signInRouter below
+//basically here the variable declared is "requiring" that the router exists aka the js file exists within the ./routes folder
+var trackerRouter = require('./routes/tracker');
+var profileRouter = require('./routes/profile');
+var mapViewRouter = require('./routes/map');
+var listViewRouter = require('./routes/list');
+var signInRouter = require('./routes/signIn');
+var registerRouter = require('./routes/register');
+//README this variable is the express app itself
 var app = express();
 
 // view engine setup
+// TODO switch to react
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(logger('dev'));
+
+app.use(cors());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use("/testAPI", testAPIRouter);
+
+app.use('/', signInRouter);
+app.use('/tracker', trackerRouter);
+app.use('/register', registerRouter);
+app.use("/profile", profileRouter);
+app.use("/list", listViewRouter);
+app.use("/map", mapViewRouter);
+app.use("/sign-in", signInRouter);
+//README here, the express app is stating that it is going to use the designated router signInRouter at the url "/signIn" which for us right now in full would be http://localhost::9000/signIn
+//So, next go to the ./routes folder and open the signIn.js file
+app.use("/signIn", signInRouter);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
