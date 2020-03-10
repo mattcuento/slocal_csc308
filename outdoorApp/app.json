@@ -25,6 +25,10 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.csc308.slocal",
+      "versionCode": 1
     }
   }
 }
