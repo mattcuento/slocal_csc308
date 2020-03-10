@@ -25,7 +25,7 @@ export default function SearchScreen() {
 
 SearchScreen.navigationOptions = {
   title: 'SLO Explore',
-  textAlign: 'center',
+  
 
 };
 
