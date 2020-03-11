@@ -14,7 +14,7 @@ const data1 = [{name: "Bishop's Peak", diff:"4", loc: "Bishops", rate: "5/5"},
 				{name: "Madonna", diff:"3", loc: "Madonna", rate: "4/5"},
 				{name: "Cal Poly P", diff:"1", loc: "Behind the Red Bricks", rate: "3/5"}];
 
-constructor(props) {
+/*constructor(props) {
 	super(props);
 	this.state = { isLoading: true }
 }
@@ -33,7 +33,7 @@ componentDidMount() {
 	.catch((error) => {
 		console.log('List View Data Error.');
 	});
-}
+}*/
 
 function Item({ name, rate, loc, diff, selected, onSelect }) {
   return (
@@ -68,7 +68,7 @@ export default function ListView() {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={this.state.dataSource}
+        data={/*this.state.dataSource*/ data1}
         renderItem={({ item }) => (
           <Item
             name={item.name}
