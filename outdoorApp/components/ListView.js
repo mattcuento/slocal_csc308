@@ -26,7 +26,7 @@ function Item({ image, name, rate, loc, diff, selected, onSelect, details, ...pr
   return (
     <TouchableOpacity
      
-      onPress={() => navigate('Profile')}
+      onPress={() => navigate('HikeDetails')}
       
       style={[
         styles.item,
@@ -92,8 +92,8 @@ export default function ListView({props}) {
             diff = {item.diff}
             details = {item.details}
             navigation={props}
-            // selected={!!selected.get(item.name)}
-            // onSelect={onSelect}
+            selected={!!selected.get(item.name)}
+            onSelect={onSelect}
           />
         )}
         keyExtractor={item => item.name}
