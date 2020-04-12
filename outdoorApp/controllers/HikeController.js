@@ -1,6 +1,7 @@
 //import template for Hikes
-var HikeRepository = require('../models/repositories/HikeRepository');
+var Hike = require('../models/Hike');
 
+var HikeRepository = require('../models/repositories/HikeRepository');
 //constructor
 exports.create_hike = function(req, res) {
   const hike = req.body;
