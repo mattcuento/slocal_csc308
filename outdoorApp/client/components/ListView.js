@@ -2,17 +2,22 @@ import React, { Component } from 'react';
 import {
   SafeAreaView,
   TouchableOpacity,
+  Button,
   FlatList,
   StyleSheet,
-  Text,
+  Text, Image, View,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
 import Constants from 'expo-constants';
+// import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from 'react-navigation-hooks';
 
-const data1 = [{name: "Bishop's Peak", diff:"4", loc: "Bishops", rate: "5/5"},
-				{name: "Madonna", diff:"3", loc: "Madonna", rate: "4/5"},
-				{name: "Cal Poly P", diff:"1", loc: "Behind the Red Bricks", rate: "3/5"}];
+
+
+const data1 = [{name: "Bishop's Peak", diff:"4", loc: "Bishops", rate: "5/5", image: "https://www.hikespeak.com/img/Central-Coast/SLO/Bishop_Peak/Bishop_Peak_Trail_IMG_6637.jpg", details: "Located in beautiful central california, Bishops is on of the most popular hikes in San Luis Obispo. The trails are frequented with many Cal Poly SLO students and local families. The trail is dog and child friendly so don't be afraid to bring the family pet along for an enjoyable hike."},
+        {name: "Madonna", diff:"3", loc: "Madonna", rate: "4/5", image: "https://www.hikespeak.com/img/Central-Coast/SLO/Madonna/Cerro_San_Luis_Trail_IMG_0763.jpg", details: "Located in beautiful central california, Bishops is on of the most popular hikes in San Luis Obispo. The trails are frequented with many Cal Poly SLO students and local families. The trail is dog and child friendly so don't be afraid to bring the family pet along for an enjoyable hike."},
+        {name: "Cal Poly P", diff:"1", loc: "Behind the Red Bricks", rate: "3/5", image: "https://magazine.calpoly.edu/wp-content/uploads/2015/10/Protecting-the-P1.jpg", details: "Located in beautiful central california, Bishops is on of the most popular hikes in San Luis Obispo. The trails are frequented with many Cal Poly SLO students and local families. The trail is dog and child friendly so don't be afraid to bring the family pet along for an enjoyable hike."}];
 
 /*constructor(props) {
 	super(props);
@@ -35,24 +40,51 @@ componentDidMount() {
 	});
 }*/
 
-function Item({ name, rate, loc, diff, selected, onSelect }) {
+function Item({ image, name, rate, loc, diff, selected, onSelect, details, ...props }) {
+  const { navigate } = useNavigation();
+
   return (
     <TouchableOpacity
-      onPress={() => onSelect(name)}
+     
+      onPress={() => navigate('HikeDetails')}
+      
       style={[
         styles.item,
-        { backgroundColor: selected ? '#khaki' : '#bdb76b' },
+        { backgroundColor: selected ? '#bdb76b' : '#f0e68c' },
       ]}
     >
-      <Text style={styles.name}>{name}, {loc}, Rating {rate}, Difficulty {diff}</Text>
+    <View style= {{
+        flex: 1,
+        flexDirection: 'row'
 
+    }}>
+        <Image 
+          source = {{uri: image}}
+          style = {{width: 200, height: 200, marginHorizontal: 10}}>
+        </Image>
+
+        <View style = {{
+            flex: 1,
+            flexDirection: 'column'
+        }}>
+
+            <Text style={styles.name}>{name}</Text>
+            <Text style={styles.name}>Location: {loc}</Text>
+            <Text style={styles.name}>Rating: {rate}</Text>
+            <Text style={styles.name}>Difficulty: {diff}</Text>
+            <Text style={styles.name}>Description: {details}</Text>
+        </View>
+
+    </View>
+      
     </TouchableOpacity>
   );
 }
 
 
 
-export default function ListView() {
+
+export default function ListView({props}) {
   const [selected, setSelected] = React.useState(new Map());
 
   const onSelect = React.useCallback(
@@ -68,13 +100,16 @@ export default function ListView() {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={/*this.state.dataSource*/ data1}
+        data={data1}
         renderItem={({ item }) => (
           <Item
+            image = {item.image}
             name={item.name}
             rate={item.rate}
             loc = {item.loc}
             diff = {item.diff}
+            details = {item.details}
+            navigation={props}
             selected={!!selected.get(item.name)}
             onSelect={onSelect}
           />
@@ -84,6 +119,7 @@ export default function ListView() {
       />
     </SafeAreaView>
   );
+
 }
 
 const styles = StyleSheet.create({
@@ -92,7 +128,7 @@ const styles = StyleSheet.create({
     marginTop: Constants.statusBarHeight,
   },
   item: {
-    backgroundColor: '#bdb76b',
+    backgroundColor: '#f0e68c',
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
