@@ -24,12 +24,7 @@
     "more": "^0.1.6",
     "morgan": "~1.9.1",
     "nodemon": "^2.0.2",
-    "pug": "^2.0.4",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-native": "^0.62.2",
-    "react-navigation": "^4.3.7",
-    "react-navigation-hooks": "^1.1.0"
+    "pug": "^2.0.4"
   },
   "description": "this folder called api/ that youre curently in contains all the main workings of the express backend.",
   "main": "server.js",
