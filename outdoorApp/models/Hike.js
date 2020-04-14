@@ -1,13 +1,24 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var Schema = mongoose.Schema;
-
-//template for Hikes
-const schema = new Schema({
-  __id: {type: Number},
-  name: { type: String },
-  difficulty: {type : Number},
-  rating: {type : Number}
+const HikeSchema = mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
+  difficulty: {
+    type: Number,
+    required: true,
+    default: 0
+  },
+  rating: {
+    type: Number,
+    required: true,
+    default: 0
+  }
 });
 
-module.exports = mongoose.model('Hike', schema);
+module.exports = mongoose.model('Hike', HikeSchema);
