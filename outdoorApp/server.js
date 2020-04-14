@@ -2,9 +2,12 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 var logger = require('morgan');
-
+var mongoose = require('mongoose');
 var cors = require('cors');
+require('dotenv/config');
+
 
 //TO START THE APP, WRTIE 'npm start' ANYWHERE UNDER THE 'api' FOLDER AND GO TO http://localhost::9000
 //README here are all the variables that contain the routers to different pages, for my example were gonna look at the signInRouter below
@@ -22,14 +25,12 @@ var app = express();
 // TODO switch to react
 
 app.use(logger('dev'));
-
 app.use(cors());
-
+app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 app.use('/', signInRouter);
 app.use('/tracker', trackerRouter);
@@ -37,10 +38,15 @@ app.use('/register', registerRouter);
 app.use("/profile", profileRouter);
 app.use("/list", listViewRouter);
 app.use("/map", mapViewRouter);
-app.use("/sign-in", signInRouter);
+app.use("/signIn", signInRouter);
 //README here, the express app is stating that it is going to use the designated router signInRouter at the url "/signIn" which for us right now in full would be http://localhost::9000/signIn
 //So, next go to the ./routes folder and open the signIn.js file
-app.use("/signIn", signInRouter);
+
+mongoose.connect(process.env.DB_CONNECTION, {useNewUrlParser: true, useUnifiedTopology: true}, () =>
+  console.log('connected to DB.')
+).catch(error =>  
+  console.error.bind(console, 'MongoDB connection error: ')
+);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -55,7 +61,6 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
 });
 
 module.exports = app;
