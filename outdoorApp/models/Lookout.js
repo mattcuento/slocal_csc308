@@ -1,14 +1,9 @@
 const mongoose = require('mongoose');
 
-const HikeSchema = mongoose.Schema({
+const LookoutSchema = mongoose.Schema({
   name: {
     type: String,
     required: true
-  },
-  type: {
-    type: String,
-    required: true,
-    default: 'Hike'
   },
   coordinates: {
     type: Array,
@@ -18,15 +13,16 @@ const HikeSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  difficulty: {
-    type: Number,
-    required: true,
-    default: 0
-  },
   rating: {
     type: Number,
     required: true,
     default: 0
+  },
+  sunrise: {
+    type: Date,
+  },
+  sunset: {
+    type: Date,
   },
   _reviews: [{
     type: mongoose.Schema.ObjectId,
@@ -45,4 +41,4 @@ const HikeSchema = mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('Hike', HikeSchema);
+module.exports = mongoose.model('Lookout', LookoutSchema);

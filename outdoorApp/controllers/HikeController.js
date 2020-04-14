@@ -18,6 +18,12 @@ exports.create_hike = async function(req, res) {
   }
 }
 
-exports.get_hikes = function(req, res) {
+exports.get_hikes = async function(req, res) {
+  try {
+    const allHikes = await Hike.find();
+    res.json(allHikes);
+  } catch(error) {
+    res.json({message: error});
+  }
 }
 
