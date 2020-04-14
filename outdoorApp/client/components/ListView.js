@@ -46,7 +46,7 @@ function Item({ image, name, rate, loc, diff, selected, onSelect, details, ...pr
   return (
     <TouchableOpacity
      
-      onPress={() => navigate('HikeDetails')}
+      onPress={() => navigate('Hike')}
       
       style={[
         styles.item,
