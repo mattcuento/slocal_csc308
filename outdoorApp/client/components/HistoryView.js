@@ -15,9 +15,9 @@ import { useNavigation } from 'react-navigation-hooks';
 
 
 
-const data1 = [{name: "Bishop's Peak", diff:"4", loc: "Bishops", rate: "5/5", image: "https://www.hikespeak.com/img/Central-Coast/SLO/Bishop_Peak/Bishop_Peak_Trail_IMG_6637.jpg", details: "Located in beautiful central california, Bishops is on of the most popular hikes in San Luis Obispo. The trails are frequented with many Cal Poly SLO students and local families. The trail is dog and child friendly so don't be afraid to bring the family pet along for an enjoyable hike."},
-        {name: "Madonna", diff:"3", loc: "Madonna", rate: "4/5", image: "https://www.hikespeak.com/img/Central-Coast/SLO/Madonna/Cerro_San_Luis_Trail_IMG_0763.jpg", details: "Located in beautiful central california, Bishops is on of the most popular hikes in San Luis Obispo. The trails are frequented with many Cal Poly SLO students and local families. The trail is dog and child friendly so don't be afraid to bring the family pet along for an enjoyable hike."},
-        {name: "Cal Poly P", diff:"1", loc: "Behind the Red Bricks", rate: "3/5", image: "https://magazine.calpoly.edu/wp-content/uploads/2015/10/Protecting-the-P1.jpg", details: "Located in beautiful central california, Bishops is on of the most popular hikes in San Luis Obispo. The trails are frequented with many Cal Poly SLO students and local families. The trail is dog and child friendly so don't be afraid to bring the family pet along for an enjoyable hike."}];
+const data1 = [{name: "Bishop's Peak", date:"3/19/2020", image: "https://www.hikespeak.com/img/Central-Coast/SLO/Bishop_Peak/Bishop_Peak_Trail_IMG_6637.jpg"},
+        {name: "Madonna", date: "4/1/2019", image: "https://www.hikespeak.com/img/Central-Coast/SLO/Madonna/Cerro_San_Luis_Trail_IMG_0763.jpg"},
+        {name: "Cal Poly P", diff:"8/14/2019", image: "https://magazine.calpoly.edu/wp-content/uploads/2015/10/Protecting-the-P1.jpg"}];
 
 /*constructor(props) {
 	super(props);
@@ -40,13 +40,13 @@ componentDidMount() {
 	});
 }*/
 
-function Item({ image, name, rate, loc, diff, selected, onSelect, details, ...props }) {
+function Item({ image, name, date, selected, onSelect, ...props }) {
   const { navigate } = useNavigation();
 
   return (
     <TouchableOpacity
      
-      onPress={() => navigate('HistoryScreen')}
+      onPress={() => navigate('Hike')}
       
       style={[
         styles.item,
@@ -69,10 +69,8 @@ function Item({ image, name, rate, loc, diff, selected, onSelect, details, ...pr
         }}>
 
             <Text style={styles.name}>{name}</Text>
-            <Text style={styles.name}>Location: {loc}</Text>
-            <Text style={styles.name}>Rating: {rate}</Text>
-            <Text style={styles.name}>Difficulty: {diff}</Text>
-            <Text style={styles.name}>Description: {details}</Text>
+            <Text style={styles.name}>Completed: {date}</Text>
+            
         </View>
 
     </View>
@@ -105,10 +103,7 @@ export default function ListView({props}) {
           <Item
             image = {item.image}
             name={item.name}
-            rate={item.rate}
-            loc = {item.loc}
-            diff = {item.diff}
-            details = {item.details}
+            date={item.date}
             navigation={props}
             selected={!!selected.get(item.name)}
             onSelect={onSelect}
@@ -137,6 +132,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
   },
 });
+
 
 
 
