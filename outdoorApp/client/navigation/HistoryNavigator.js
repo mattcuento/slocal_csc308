@@ -4,7 +4,7 @@ import { createAppContainer,
          createStackNavigator, 
          createSwitchNavigator } from 'react-navigation-stack';
 
-import HistoryScreen from '../screens/HikeDetails';
+import HistoryScreen from '../screens/HistoryScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },

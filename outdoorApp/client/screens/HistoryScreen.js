@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View,} from 'react-native';
 import { ExpoLinksView } from '@expo/samples';
-import ListView from "../components/ListView";
+import HistoryView from "../components/HistoryView";
 
 
 export default function HistoryScreen() {
@@ -23,7 +23,7 @@ export default function HistoryScreen() {
   );
 }
 
-SearchScreen.navigationOptions = {
+HistoryScreen.navigationOptions = {
   title: 'History',
   
 
