@@ -55,7 +55,7 @@ function Item({ image, name, rate, loc, diff, selected, onSelect, details, ...pr
     >
     <View style= {{
         flex: 1,
-        flexDirection: 'row'
+        flexDirection: 'column'
 
     }}>
         <Image 
@@ -76,7 +76,6 @@ function Item({ image, name, rate, loc, diff, selected, onSelect, details, ...pr
         </View>
 
     </View>
-      
     </TouchableOpacity>
   );
 }

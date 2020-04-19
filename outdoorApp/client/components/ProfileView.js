@@ -5,6 +5,7 @@ import {
   TextInput, 
   ScrollView, 
   KeyboardAvoidingView, 
+  TouchableOpacity,
   View,
   Button,
   StyleSheet,
@@ -61,9 +62,10 @@ export class ProfileView extends Component {
             </Text>
           </View>  
           <View style={styles.mainContainer}>
-            <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.buttonContainer}
+              onPress={() => this.props.navigation.navigate('Favorites')}>
               <Text style={styles.buttonText}>Favorites</Text>
-            </View>
+            </TouchableOpacity>
             <View style={styles.buttonContainer}>
               <Text style={styles.buttonText}>History</Text>
             </View>
@@ -106,7 +108,6 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     borderRadius: 100,
-    borderWidth: 7,
     borderColor: '#f0e68c',
     marginBottom: 20,
     marginLeft: 20,
