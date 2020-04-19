@@ -85,6 +85,9 @@ function Item({ image, name, rate, loc, diff, selected, onSelect, details, ...pr
 
 
 export default function ListView({props}) {
+  let data = fetch('/list').then((resp)=>{ return resp.json() }).then((json)=>{ console.log(json) })
+  console.log(data);
+
   const [selected, setSelected] = React.useState(new Map());
 
   const onSelect = React.useCallback(

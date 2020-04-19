@@ -7,7 +7,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "server": "node ./api/bin/www",
+    "server": "nodemon ./api/bin/www",
     "dev": "concurrently \"npm start\" \"npm server\" "
   },
   "jest": {
