@@ -5,6 +5,7 @@ import AuthNavigator from './AuthNavigator';
 import HikeNavigator from './HikeNavigator';
 import MainTabNavigator from './MainTabNavigator';
 import HistoryNavigator from './HistoryNavigator';
+import SettingsNavigator from './SettingsNavigator';
 
 export default createAppContainer(
   createSwitchNavigator({
@@ -14,6 +15,7 @@ export default createAppContainer(
     Auth: AuthNavigator,
     Hike: HikeNavigator,
     History: HistoryNavigator,
+    Settings: SettingsNavigator,
     Main: MainTabNavigator,
 
 
