@@ -8,6 +8,7 @@ cache:
     directories:
     - node_modules
 before_install:
+- cd outdoorApp
 - npm update
 install:
 - npm install
