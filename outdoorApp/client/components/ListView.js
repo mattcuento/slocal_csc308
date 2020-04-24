@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import {
   SafeAreaView,
   TouchableOpacity,
@@ -13,34 +14,7 @@ import Constants from 'expo-constants';
 // import { useNavigation } from '@react-navigation/native';
 import { useNavigation } from 'react-navigation-hooks';
 
-
-
-const data1 = [{name: "Bishop's Peak", diff:"4", loc: "Bishops", rate: "5/5", image: "https://www.hikespeak.com/img/Central-Coast/SLO/Bishop_Peak/Bishop_Peak_Trail_IMG_6637.jpg", details: "Located in beautiful central california, Bishops is on of the most popular hikes in San Luis Obispo. The trails are frequented with many Cal Poly SLO students and local families. The trail is dog and child friendly so don't be afraid to bring the family pet along for an enjoyable hike."},
-        {name: "Madonna", diff:"3", loc: "Madonna", rate: "4/5", image: "https://www.hikespeak.com/img/Central-Coast/SLO/Madonna/Cerro_San_Luis_Trail_IMG_0763.jpg", details: "Located in beautiful central california, Bishops is on of the most popular hikes in San Luis Obispo. The trails are frequented with many Cal Poly SLO students and local families. The trail is dog and child friendly so don't be afraid to bring the family pet along for an enjoyable hike."},
-        {name: "Cal Poly P", diff:"1", loc: "Behind the Red Bricks", rate: "3/5", image: "https://magazine.calpoly.edu/wp-content/uploads/2015/10/Protecting-the-P1.jpg", details: "Located in beautiful central california, Bishops is on of the most popular hikes in San Luis Obispo. The trails are frequented with many Cal Poly SLO students and local families. The trail is dog and child friendly so don't be afraid to bring the family pet along for an enjoyable hike."}];
-
-/*constructor(props) {
-	super(props);
-	this.state = { isLoading: true }
-}
-
-componentDidMount() {
-	fetch('/list')
-	.then((response) => response.json())
-	.then((responseJson)) => {
-		this.setState({
-			isLoading: false,
-			dataSource: responseJson
-		}, function() {
-		
-		});
-	})
-	.catch((error) => {
-		console.log('List View Data Error.');
-	});
-}*/
-
-function Item({ image, name, rate, loc, diff, selected, onSelect, details, ...props }) {
+function Item({ image, name, rating, coordinates, difficulty, selected, onSelect, description, ...props }) {
   const { navigate } = useNavigation();
 
   return (
@@ -69,10 +43,10 @@ function Item({ image, name, rate, loc, diff, selected, onSelect, details, ...pr
         }}>
 
             <Text style={styles.name}>{name}</Text>
-            <Text style={styles.name}>Location: {loc}</Text>
-            <Text style={styles.name}>Rating: {rate}</Text>
-            <Text style={styles.name}>Difficulty: {diff}</Text>
-            <Text style={styles.name}>Description: {details}</Text>
+            <Text style={styles.name}>Location: {coordinates}</Text>
+            <Text style={styles.name}>Rating: {rating}</Text>
+            <Text style={styles.name}>Difficulty: {difficulty}</Text>
+            <Text style={styles.name}>Description: {description}</Text>
         </View>
 
     </View>
@@ -81,45 +55,60 @@ function Item({ image, name, rate, loc, diff, selected, onSelect, details, ...pr
   );
 }
 
+class ListView extends Component {
+constructor(props) {
+    super(props);
+    
+	this.state = { 
+        selected: null,
+        isLoading: true,
+        hikes: []
+    };
 
+  this.getHikes = this.getHikes.bind(this);
+}
 
+async getHikes() {
+  let hikes = await axios.get('http://localhost:9000/list')
+   .then(res => res.data)
+   .then(data => {
+    this.setState({
+      selected: null,
+      isLoading: false,
+      hikes: data 
+    });
+    console.log(data);
+   });
+}
 
-export default function ListView({props}) {
-  const [selected, setSelected] = React.useState(new Map());
+componentDidMount() {
+  let hikes = this.getHikes();
+}
 
-  const onSelect = React.useCallback(
-    id => {
-      const newSelected = new Map(selected);
-      newSelected.set(id, !selected.get(id));
-
-      setSelected(newSelected);
-    },
-    [selected],
-  );
-
+render() {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={data1}
+        data={this.state.hikes}
         renderItem={({ item }) => (
           <Item
             image = {item.image}
             name={item.name}
-            rate={item.rate}
-            loc = {item.loc}
-            diff = {item.diff}
-            details = {item.details}
-            navigation={props}
-            selected={!!selected.get(item.name)}
-            onSelect={onSelect}
+            rate={item.rating}
+            loc = {item.coordinates}
+            diff = {item.difficulty}
+            details = {item.description}
+            navigation={this.props}
+            // selected={!!this.state.selected.get(item.name)}
+            // onSelect={onSelect}
           />
         )}
         keyExtractor={item => item.name}
-        extraData={selected}
+        extraData={this.state.selected}
       />
     </SafeAreaView>
   );
-
+}
 }
 
 const styles = StyleSheet.create({
@@ -138,8 +127,6 @@ const styles = StyleSheet.create({
   },
 });
 
-
-
-
+export default ListView
 
 
