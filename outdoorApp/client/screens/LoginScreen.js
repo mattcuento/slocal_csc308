@@ -19,7 +19,7 @@ export default class LoginBackground extends Component {
         <ImageBackground
           style={styles.imageStyle}
           source={require('../assets/images/slo-background.jpg')}>
-          { <Login/> }
+          { <Login navigation={this.props.navigation}/> }
         </ImageBackground>
     );
   }
@@ -35,7 +35,7 @@ export class Login extends Component {
             <UsernameEntry text='Username:'/>
             <PasswordEntry text='Password:'/>
           </ScrollView>
-            <LoginButton />
+            <LoginButton navigation={this.props.navigation}/>
         </View>
       </KeyboardAvoidingView>
     );
@@ -84,7 +84,8 @@ export class LoginButton extends Component {
   render() {
     return (
       <View style={styles.buttonWrapper}>
-        <TouchableHighlight style={styles.buttonStyle}>
+        <TouchableHighlight style={styles.buttonStyle}
+          onPress={() => this.props.navigation.navigate('SearchStack')}>
           <Icon
             name="angle-right"
             color="white"
