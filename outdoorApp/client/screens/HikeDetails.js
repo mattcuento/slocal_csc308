@@ -16,6 +16,10 @@ export default class HikeScreen extends Component {
   render() {
     return (
     <View style={styles.imageWrapper}> 
+      <Button
+        onPress={() => this.props.navigation.navigate('SearchStack')}
+        title='Back'
+      />
       <HikePicture/>
       <HikeDescription 
         name='The "P"' 
