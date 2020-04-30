@@ -1,16 +1,18 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View,} from 'react-native';
 import { ExpoConfigView } from '@expo/samples';
-import ProfileView from "../components/ProfileView";
+import FavoritesView from "../components/FavoritesView";
 
-export default function ProfileScreen() {
+export default function FavoritesScreen() {
   return (
-      <ProfileView/>
+    <ScrollView style={styles.container}>
+      <FavoritesView/>
+    </ScrollView>
   );
 }
 
-ProfileScreen.navigationOptions = {
-  title: 'Profile',
+FavoritesScreen.navigationOptions = {
+  title: 'Favorites',
 };
 
 const styles = StyleSheet.create({
