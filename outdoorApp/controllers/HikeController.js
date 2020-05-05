@@ -1,17 +1,29 @@
 //import template for Hikes
-var HikeRepository = require('../models/repositories/HikeRepository');
+var Hike = require('../models/Hike');
+var mongoose = require('mongoose');
 
-//constructor
-exports.create_hike = function(req, res) {
-  const hike = req.body;
+exports.create_hike = async function(req, res) {
+  const hike = new Hike({
+    name: req.body.name,
+    description: req.body.description,
+    difficulty: req.body.difficulty,
+    rating: req.body.rating
+  });
+  
+  try {
+    const savedHike = await hike.save();
+    res.json(savedHike);
+  } catch(error) {
+    res.json({message: error});
+  }
+}
 
-  HikeRepository.create(hike)
-    .then((newHike) => {
-      res.json(newHike);
-    }).catch((errors) => {
-      res.status(500).json({
-        errors,
-      });
-    });
+exports.get_hikes = async function(req, res) {
+  try {
+    const allHikes = await Hike.find();
+    res.json(allHikes);
+  } catch(error) {
+    res.json({message: error});
+  }
 }
 

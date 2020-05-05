@@ -7,6 +7,7 @@ import { createAppContainer,
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
+import FavoritesScreen from '../screens/FavoritesScreen';
 
 const config = Platform.select({
   web: { headerMode: 'None' },
@@ -17,7 +18,8 @@ const AuthNavigator = createStackNavigator(
   {
     Welcome: WelcomeScreen,
     Login: LoginScreen,
-    Register: RegisterScreen
+    Register: RegisterScreen,
+    Favorites: FavoritesScreen,
   },
   config
 );

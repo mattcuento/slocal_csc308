@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
   SafeAreaView,
   TouchableOpacity,
-  Button,
   FlatList,
   StyleSheet,
   Text, Image, View,
@@ -40,7 +39,7 @@ componentDidMount() {
 	});
 }*/
 
-function Item({ image, name, date, selected, onSelect, ...props }) {
+function Item({ image, name, time, selected, onSelect, ...props }) {
   const { navigate } = useNavigation();
 
   return (
@@ -69,7 +68,7 @@ function Item({ image, name, date, selected, onSelect, ...props }) {
         }}>
 
             <Text style={styles.name}>{name}</Text>
-            <Text style={styles.name}>Completed: {date}</Text>
+            <Text style={styles.name}>Completed: {time}</Text>
             
         </View>
 
@@ -82,57 +81,76 @@ function Item({ image, name, date, selected, onSelect, ...props }) {
 
 
 
-export default function ListView({props}) {
-  const [selected, setSelected] = React.useState(new Map());
-
-  const onSelect = React.useCallback(
-    id => {
-      const newSelected = new Map(selected);
-      newSelected.set(id, !selected.get(id));
-
-      setSelected(newSelected);
+class ListView extends Component {
+  constructor(props) {
+      super(props);
+      
+    this.state = { 
+          selected: null,
+          isLoading: true,
+          hikes: []
+      };
+  
+    this.getHikes = this.getHikes.bind(this);
+  }
+  
+  async getHikes() {
+    let hikes = await axios.get('http://localhost:9000/list')
+     .then(res => res.data)
+     .then(data => {
+      this.setState({
+        selected: null,
+        isLoading: false,
+        hikes: data 
+      });
+      console.log(data);
+     });
+  }
+  
+  componentDidMount() {
+    let hikes = this.getHikes();
+  }
+  
+  render() {
+    return (
+      <SafeAreaView style={styles.container}>
+        <FlatList
+          data={this.state.hikes}
+          renderItem={({ item }) => (
+            <Item
+              image = {item.image}
+              name={item.name}
+              time= {item.time}
+              navigation={this.props}
+              // selected={!!this.state.selected.get(item.name)}
+              // onSelect={onSelect}
+            />
+          )}
+          keyExtractor={item => item.name}
+          extraData={this.state.selected}
+        />
+      </SafeAreaView>
+    );
+  }
+  }
+  
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      marginTop: Constants.statusBarHeight,
     },
-    [selected],
-  );
-
-  return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={data1}
-        renderItem={({ item }) => (
-          <Item
-            image = {item.image}
-            name={item.name}
-            date={item.date}
-            navigation={props}
-            selected={!!selected.get(item.name)}
-            onSelect={onSelect}
-          />
-        )}
-        keyExtractor={item => item.name}
-        extraData={selected}
-      />
-    </SafeAreaView>
-  );
-
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: Constants.statusBarHeight,
-  },
-  item: {
-    backgroundColor: '#f0e68c',
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
-  },
-  title: {
-    fontSize: 32,
-  },
-});
-
+    item: {
+      backgroundColor: '#f0e68c',
+      padding: 20,
+      marginVertical: 8,
+      marginHorizontal: 16,
+    },
+    title: {
+      fontSize: 32,
+    },
+  });
+  
+  export default ListView
 
 
 

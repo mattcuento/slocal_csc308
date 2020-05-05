@@ -1,10 +1,11 @@
 node_modules/**/*
-.expo/*
+client/.expo/*
 npm-debug.*
 *.jks
 *.p8
 *.p12
 *.key
+*.env
 *.mobileprovision
 *.orig.*
 web-build/
