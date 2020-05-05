@@ -41,7 +41,7 @@ const BeachSchema = mongoose.Schema({
   time: {
     type: Date,
     required: true,
-    Default: Date.now()
+    default: Date.now()
   }
 });
 

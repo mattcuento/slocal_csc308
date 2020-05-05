@@ -9,7 +9,7 @@ var cors = require('cors');
 require('dotenv/config');
 
 
-//TO START THE APP, WRTIE 'npm start' ANYWHERE UNDER THE 'api' FOLDER AND GO TO http://localhost::9000
+//TO START THE APP, WRTIE 'npm start' ANYWHERE UNDER THE 'api' FOLDER AND GO TO http://localhost:9000
 //README here are all the variables that contain the routers to different pages, for my example were gonna look at the signInRouter below
 //basically here the variable declared is "requiring" that the router exists aka the js file exists within the ./routes folder
 var trackerRouter = require('./routes/tracker');

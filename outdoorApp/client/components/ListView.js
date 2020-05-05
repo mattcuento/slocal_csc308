@@ -3,7 +3,6 @@ import axios from 'axios';
 import {
   SafeAreaView,
   TouchableOpacity,
-  Button,
   FlatList,
   StyleSheet,
   Text, Image, View,
@@ -20,7 +19,7 @@ function Item({ image, name, rating, coordinates, difficulty, selected, onSelect
   return (
     <TouchableOpacity
      
-      onPress={() => navigate('Hike')}
+      onPress={() => navigate('Settings')}
       
       style={[
         styles.item,
