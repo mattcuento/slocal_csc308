@@ -1,10 +1,9 @@
-import React from 'react';
-import { ScrollView, StyleSheet, Text, View,} from 'react-native';
-import { ExpoLinksView } from '@expo/samples';
-import ListView from "../components/ListView";
+import React from 'react'
+import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { ExpoLinksView } from '@expo/samples'
+import ListView from '../components/ListView'
 
-
-export default function SearchScreen() {
+export default function SearchScreen () {
   return (
     <ScrollView style={styles.container}>
       {/**
@@ -12,30 +11,22 @@ export default function SearchScreen() {
        * we just wanted to provide you with some helpful links.
        */}
       <ListView/>
-      
-      
 
-       
-
-
-      
     </ScrollView>
-  );
+  )
 }
 
 SearchScreen.navigationOptions = {
-  title: 'SLO Explore',
-  
+  title: 'SLO Explore'
 
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 15,
-    backgroundColor: 'seagreen',
-    
-  },
+    backgroundColor: 'seagreen'
 
-});
+  }
 
+})

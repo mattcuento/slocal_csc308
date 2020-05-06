@@ -1,4 +1,4 @@
-/*import React from 'react';
+/* import React from 'react';
 import NavigationTestUtils from 'react-navigation/NavigationTestUtils';
 import renderer from 'react-test-renderer';
 
@@ -29,8 +29,8 @@ describe('App', () => {
 });
 */
 
-const sum = require('../../sum');
+const sum = require('../../sum')
 
 test('adds 1 + 2 to equal 3', () => {
-    expect(sum(1,2)).toBe(3);
-});
+  expect(sum(1, 2)).toBe(3)
+})

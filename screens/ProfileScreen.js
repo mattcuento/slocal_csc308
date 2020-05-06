@@ -1,19 +1,20 @@
-import React from 'react';
-import { ScrollView, StyleSheet, Text, View,} from 'react-native';
-import { ExpoConfigView } from '@expo/samples';
-import ProfileView from "../components/ProfileView";
+import React from 'react'
+import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { ExpoConfigView } from '@expo/samples'
+import ProfileView from '../components/ProfileView'
 
-export default function ProfileScreen() {
+export default function ProfileScreen () {
   return (
-      <ProfileView/>
-  );
+    <ProfileView/>
+  )
 }
 
 ProfileScreen.navigationOptions = {
-  title: 'Profile',
-};
+  title: 'Profile'
+}
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'seagreen',
-  },});
+    backgroundColor: 'seagreen'
+  }
+})
