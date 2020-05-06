@@ -50,7 +50,7 @@ function Item({ image, name, time, selected, onSelect, ...props }) {
   )
 }
 
-class ListView extends Component {
+class HistoryView extends Component {
   constructor (props) {
     super(props)
 
@@ -119,4 +119,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default ListView
+export default HistoryView
