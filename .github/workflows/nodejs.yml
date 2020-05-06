@@ -24,6 +24,8 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - run: cd outdoorApp
+    - run: cd client
     - run: npm ci
     - name: ESLint Action
       uses: hallee/eslint-action@1.0.1
