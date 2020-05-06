@@ -10,6 +10,23 @@ on:
     branches: [ master ]
 
 jobs:
+  eslint:
+    name: eslint job
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm ci
+    - uses: stefanoeb/eslint-action@1.0.2
+
   build:
     name: build and test
     runs-on: ubuntu-latest
@@ -27,19 +44,4 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
-  eslint:
-    name: eslint job
-    runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [10.x, 12.x]
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm ci
-    - uses: stefanoeb/eslint-action@1.0.2
