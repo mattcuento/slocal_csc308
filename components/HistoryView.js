@@ -95,7 +95,7 @@ class ListView extends Component {
   }
   
   async getHikes() {
-    let hikes = await axios.get('http://localhost:9000/list')
+    let hikes = await axios.get('https://slo-explore-308.herokuapp.com/')
      .then(res => res.data)
      .then(data => {
       this.setState({
