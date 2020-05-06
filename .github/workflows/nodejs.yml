@@ -13,11 +13,6 @@ jobs:
   build:
     name: build and test
     runs-on: ubuntu-latest
-    
-    defaults:
-      run:
-        shell: bash
-        working-directory: outdoorApp/client
 
     strategy:
       matrix:
@@ -35,11 +30,6 @@ jobs:
   lint:
     name: lint
     runs-on: ubuntu-latest
-    
-    defaults:
-      run:
-        shell: bash
-        working-directory: outdoorApp/client
 
     strategy:
       matrix:
@@ -54,5 +44,3 @@ jobs:
     - run: npm ci
     - name: ESLint Action
       uses: hallee/eslint-action@1.0.1
-      with:
-        working-directory: outdoorApp/client
