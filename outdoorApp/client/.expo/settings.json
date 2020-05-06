@@ -1,12 +1,8 @@
 {
-  "hostType": "lan",
-  "lanType": "ip",
   "dev": true,
   "minify": false,
-<<<<<<< HEAD
-  "urlRandomness": "rb-62k",
-=======
-  "urlRandomness": "h8-gpz",
->>>>>>> 3022de402e941aef10c3809750e0fa8e9b98b95e
+  "hostType": "lan",
+  "lanType": "ip",
+  "urlRandomness": "wk-643",
   "https": false
 }
