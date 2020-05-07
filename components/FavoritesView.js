@@ -8,14 +8,14 @@ import {
   StyleSheet,
   Text, Image, View
 } from 'react-native'
-import { Ionicons } from '@expo/vector-icons'
-import Colors from '../constants/Colors'
+
 import Constants from 'expo-constants'
 // import { useNavigation } from '@react-navigation/native';
 import { withNavigation } from 'react-navigation'
 import { useNavigation } from 'react-navigation-hooks'
 
-function Item ({ image, name, rate, loc, diff, selected, onSelect, details, ...props }) {
+
+function Item({ image, name, rate, loc, diff, selected, onSelect, details, ...props }) {
   const { navigate } = useNavigation()
 
   return (
@@ -26,8 +26,7 @@ function Item ({ image, name, rate, loc, diff, selected, onSelect, details, ...p
       style={[
         styles.item,
         { backgroundColor: selected ? '#bdb76b' : '#f0e68c' }
-      ]}
-    >
+      ]}>
       <View style= {{
         flex: 1,
         flexDirection: 'column'
@@ -58,7 +57,6 @@ function Item ({ image, name, rate, loc, diff, selected, onSelect, details, ...p
 class FavoritesView extends Component {
   constructor (props) {
     super(props)
-
     this.state = {
       selected: null,
       isLoading: true,
@@ -69,7 +67,7 @@ class FavoritesView extends Component {
   }
 
   async getHikes () {
-    const hikes = await axios.get('http://localhost:9000/list')
+    let hikes = await axios.get('https://slo-explore-308.herokuapp.com/')
       .then(res => res.data)
       .then(data => {
         this.setState({
@@ -82,7 +80,7 @@ class FavoritesView extends Component {
   }
 
   componentDidMount () {
-    const hikes = this.getHikes()
+    let hikes = this.getHikes()
   }
 
   render () {
