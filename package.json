@@ -8,8 +8,8 @@
     "eject": "expo eject",
     "cypress:open": "cypress open",
     "web:start": "expo start --web-only",
-    "web:e2e:ci": "cypress run",
-    "web:e2e": "start-server-and-test web:start 19006 web:e2e:ci"
+    "web:e2e:ci": "cypress run --record --key 7770fbfa-7510-40cf-a17e-d217a16ca9d4",
+    "web:e2e": "start-server-and-test web:start http://localhost:19006 web:e2e:ci"
   },
   "jest": {
     "preset": "jest-expo"
@@ -55,7 +55,8 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-standard": "^4.0.1",
-    "jest-expo": "~36.0.1"
+    "jest-expo": "~36.0.1",
+    "start-server-and-test": "^1.11.0"
   },
   "private": true
 }
