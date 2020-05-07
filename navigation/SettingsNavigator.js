@@ -1,22 +1,21 @@
-import React from 'react';
-import { Platform } from 'react-native';
-import { createAppContainer,
-         createStackNavigator, 
-         createSwitchNavigator } from 'react-navigation-stack';
+import { Platform } from 'react-native'
+import {
+  createStackNavigator
+} from 'react-navigation-stack'
 
-import SettingsScreen from '../screens/SettingsScreen';
+import SettingsScreen from '../screens/SettingsScreen'
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
   default: {},
-  title: 'Settings',
-});
+  title: 'Settings'
+})
 
 const SettingsNavigator = createStackNavigator(
   {
-    Settings: SettingsScreen,
+    Settings: SettingsScreen
   },
   config
-);
+)
 
-export default SettingsNavigator;
+export default SettingsNavigator

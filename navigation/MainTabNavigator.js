@@ -1,28 +1,25 @@
-import React from 'react';
-import { Platform } from 'react-native';
-import { createStackNavigator } from 'react-navigation-stack';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
+import React from 'react'
+import { Platform } from 'react-native'
+import { createStackNavigator } from 'react-navigation-stack'
+import { createBottomTabNavigator } from 'react-navigation-tabs'
 
-import { StyleSheet } from 'react-native';
-
-import TabBarIcon from '../components/TabBarIcon';
-import MapScreen from '../screens/MapScreen';
-import StatTrackerScreen from '../screens/StatTrackerScreen';
-import ProfileScreen from '../screens/ProfileScreen';
-import SearchScreen from '../screens/SearchScreen';
+import TabBarIcon from '../components/TabBarIcon'
+import MapScreen from '../screens/MapScreen'
+import StatTrackerScreen from '../screens/StatTrackerScreen'
+import ProfileScreen from '../screens/ProfileScreen'
+import SearchScreen from '../screens/SearchScreen'
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
-  default: {},
-});
-
+  default: {}
+})
 
 const MapStack = createStackNavigator(
   {
-    Map: MapScreen,
+    Map: MapScreen
   },
   config
-);
+)
 
 MapStack.navigationOptions = {
   tabBarLabel: 'Map',
@@ -35,21 +32,17 @@ MapStack.navigationOptions = {
           : 'md-pin'
       }
     />
-  ),
-};
+  )
+}
 
-MapStack.path = '';
-
-
-
+MapStack.path = ''
 
 const SearchStack = createStackNavigator(
   {
-    Search: SearchScreen,
+    Search: SearchScreen
   },
   config
-);
-
+)
 
 SearchStack.navigationOptions = {
   tabBarLabel: 'Search',
@@ -58,57 +51,55 @@ SearchStack.navigationOptions = {
       focused={focused}
       name={
         Platform.OS === 'ios'
-        ? 'ios-search'
-        : 'md-search'
+          ? 'ios-search'
+          : 'md-search'
       }
     />
-  ),
-};
+  )
+}
 
-SearchStack.path = '';
-
-
+SearchStack.path = ''
 
 const StatTrackerStack = createStackNavigator(
   {
-    StatTracker: StatTrackerScreen,
+    StatTracker: StatTrackerScreen
   },
   config
-);
+)
 
 StatTrackerStack.navigationOptions = {
   tabBarLabel: 'Stat Tracker',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-radio-button-on' : 'md-radio-button-on'} />
-  ),
-};
+  )
+}
 
-StatTrackerStack.path = '';
+StatTrackerStack.path = ''
 
 const ProfileStack = createStackNavigator(
   {
-    Profile: ProfileScreen,
+    Profile: ProfileScreen
   },
   config
-);
+)
 
 ProfileStack.navigationOptions = {
   tabBarLabel: 'Profile',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'} />
-  ),
-};
+  )
+}
 
-ProfileStack.path = '';
+ProfileStack.path = ''
 
 const tabNavigator = createBottomTabNavigator({
   SearchStack,
   MapStack,
   StatTrackerStack,
-  ProfileStack,
- 
-});
+  ProfileStack
 
-tabNavigator.path = '';
+})
 
-export default tabNavigator;
+tabNavigator.path = ''
+
+export default tabNavigator

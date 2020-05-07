@@ -1,132 +1,128 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { Component } from 'react'
+import axios from 'axios'
 import {
   SafeAreaView,
   TouchableOpacity,
   FlatList,
   StyleSheet,
-  Text, Image, View,
-} from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import Colors from '../constants/Colors';
-import Constants from 'expo-constants';
+  Text, Image, View
+} from 'react-native'
+import Constants from 'expo-constants'
 // import { useNavigation } from '@react-navigation/native';
-import { useNavigation } from 'react-navigation-hooks';
+import { useNavigation } from 'react-navigation-hooks'
 
-function Item({ image, name, rating, coordinates, difficulty, selected, onSelect, description, ...props }) {
-  const { navigate } = useNavigation();
+function Item ({ image, name, rating, coordinates, difficulty, selected, onSelect, description, ...props }) {
+  const { navigate } = useNavigation()
 
   return (
     <TouchableOpacity
-     
+
       onPress={() => navigate('Settings')}
-      
+
       style={[
         styles.item,
-        { backgroundColor: selected ? '#bdb76b' : '#f0e68c' },
+        { backgroundColor: selected ? '#bdb76b' : '#f0e68c' }
       ]}
     >
-    <View style= {{
+      <View style= {{
         flex: 1,
         flexDirection: 'row'
 
-    }}>
-        <Image 
-          source = {{uri: image}}
-          style = {{width: 200, height: 200, marginHorizontal: 10}}>
+      }}>
+        <Image
+          source = {{ uri: image }}
+          style = {{ width: 200, height: 200, marginHorizontal: 10 }}>
         </Image>
 
         <View style = {{
-            flex: 1,
-            flexDirection: 'column'
+          flex: 1,
+          flexDirection: 'column'
         }}>
 
-            <Text style={styles.name}>{name}</Text>
-            <Text style={styles.name}>Location: {coordinates}</Text>
-            <Text style={styles.name}>Rating: {rating}</Text>
-            <Text style={styles.name}>Difficulty: {difficulty}</Text>
-            <Text style={styles.name}>Description: {description}</Text>
+          <Text style={styles.name}>{name}</Text>
+          <Text style={styles.name}>Location: {coordinates}</Text>
+          <Text style={styles.name}>Rating: {rating}</Text>
+          <Text style={styles.name}>Difficulty: {difficulty}</Text>
+          <Text style={styles.name}>Description: {description}</Text>
         </View>
 
-    </View>
-      
+      </View>
+
     </TouchableOpacity>
-  );
+  )
 }
 
 class ListView extends Component {
-constructor(props) {
-    super(props);
-    
-	this.state = { 
-        selected: null,
-        isLoading: true,
-        hikes: []
-    };
+  constructor (props) {
+    super(props)
 
-  this.getHikes = this.getHikes.bind(this);
-}
-
-async getHikes() {
-  let hikes = await axios.get('https://slo-explore-308.herokuapp.com/list')
-   .then(res => res.data)
-   .then(data => {
-    this.setState({
+    this.state = {
       selected: null,
-      isLoading: false,
-      hikes: data 
-    });
-    console.log(data);
-   })
-   .catch(err => console.log(err));
-}
+      isLoading: true,
+      hikes: []
+    }
 
-componentDidMount() {
-  let hikes = this.getHikes();
-}
+    this.getHikes = this.getHikes.bind(this)
+  }
 
-render() {
-  return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={this.state.hikes}
-        renderItem={({ item }) => (
-          <Item
-            image = {item.image}
-            name={item.name}
-            rate={item.rating}
-            loc = {item.coordinates}
-            diff = {item.difficulty}
-            details = {item.description}
-            navigation={this.props}
+  async getHikes () {
+    await axios.get('https://slo-explore-308.herokuapp.com/list')
+      .then(res => res.data)
+      .then(data => {
+        this.setState({
+          selected: null,
+          isLoading: false,
+          hikes: data
+        })
+        console.log(data)
+      })
+      .catch(err => console.log(err))
+  }
+
+  componentDidMount () {
+    this.getHikes()
+  }
+
+  render () {
+    return (
+      <SafeAreaView style={styles.container}>
+        <FlatList
+          data={this.state.hikes}
+          renderItem={({ item }) => (
+            <Item
+              image = {item.image}
+              name={item.name}
+              rate={item.rating}
+              loc = {item.coordinates}
+              diff = {item.difficulty}
+              details = {item.description}
+              navigation={this.props}
             // selected={!!this.state.selected.get(item.name)}
             // onSelect={onSelect}
-          />
-        )}
-        keyExtractor={item => item.name}
-        extraData={this.state.selected}
-      />
-    </SafeAreaView>
-  );
-}
+            />
+          )}
+          keyExtractor={item => item.name}
+          extraData={this.state.selected}
+        />
+      </SafeAreaView>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: Constants.statusBarHeight,
+    marginTop: Constants.statusBarHeight
   },
   item: {
     backgroundColor: '#f0e68c',
     padding: 20,
     marginVertical: 8,
-    marginHorizontal: 16,
+    marginHorizontal: 16
   },
   title: {
-    fontSize: 32,
-  },
-});
+    fontSize: 32
+  }
+})
 
 export default ListView
-
-
