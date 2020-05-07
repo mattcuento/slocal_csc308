@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import { withNavigation } from 'react-navigation'
 import {
   Text,
-  TextInput,
-  ScrollView,
-  KeyboardAvoidingView,
   View,
   Button,
   StyleSheet,

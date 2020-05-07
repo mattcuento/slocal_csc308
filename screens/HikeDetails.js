@@ -1,11 +1,6 @@
 import React, { Component } from 'react'
-import { PropTypes } from 'prop-types'
 import {
   Text,
-  TouchableHighlight,
-  TextInput,
-  ScrollView,
-  KeyboardAvoidingView,
   View,
   Button,
   StyleSheet,
