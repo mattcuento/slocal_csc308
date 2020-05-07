@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 21245,
+  "expoServerNgrokUrl": "https://dr-a2m.anonymous.csc308outdoors.exp.direct",
+  "packagerNgrokUrl": "https://packager.dr-a2m.anonymous.csc308outdoors.exp.direct",
+  "ngrokPid": 21295,
   "webpackServerPort": null
 }
