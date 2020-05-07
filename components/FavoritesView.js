@@ -14,8 +14,7 @@ import Constants from 'expo-constants'
 import { withNavigation } from 'react-navigation'
 import { useNavigation } from 'react-navigation-hooks'
 
-
-function Item({ image, name, rate, loc, diff, selected, onSelect, details, ...props }) {
+function Item ({ image, name, rate, loc, diff, selected, onSelect, details, ...props }) {
   const { navigate } = useNavigation()
 
   return (
@@ -67,7 +66,7 @@ class FavoritesView extends Component {
   }
 
   async getHikes () {
-    let hikes = await axios.get('https://slo-explore-308.herokuapp.com/')
+    const hikes = await axios.get('https://slo-explore-308.herokuapp.com/')
       .then(res => res.data)
       .then(data => {
         this.setState({
@@ -80,7 +79,7 @@ class FavoritesView extends Component {
   }
 
   componentDidMount () {
-    let hikes = this.getHikes()
+    const hikes = this.getHikes()
   }
 
   render () {
