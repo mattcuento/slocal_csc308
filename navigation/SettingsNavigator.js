@@ -1,9 +1,6 @@
-import React from 'react'
 import { Platform } from 'react-native'
 import {
-  createAppContainer,
-  createStackNavigator,
-  createSwitchNavigator
+  createStackNavigator
 } from 'react-navigation-stack'
 
 import SettingsScreen from '../screens/SettingsScreen'

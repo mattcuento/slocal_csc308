@@ -1,6 +1,5 @@
 import React from 'react'
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
-import { ExpoConfigView } from '@expo/samples'
+import { StyleSheet } from 'react-native'
 import ProfileView from '../components/ProfileView'
 
 export default function ProfileScreen () {

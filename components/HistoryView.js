@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 import {
   SafeAreaView,
   TouchableOpacity,
@@ -11,7 +12,7 @@ import Constants from 'expo-constants'
 // import { useNavigation } from '@react-navigation/native';
 import { useNavigation } from 'react-navigation-hooks'
 
-function Item({ image, name, time, selected, onSelect, ...props }) {
+function Item ({ image, name, time, selected, onSelect, ...props }) {
   const { navigate } = useNavigation()
 
   return (
@@ -64,7 +65,7 @@ class HistoryView extends Component {
   }
 
   async getHikes () {
-    let hikes = await axios.get('https://slo-explore-308.herokuapp.com/')
+    await axios.get('https://slo-explore-308.herokuapp.com/')
       .then(res => res.data)
       .then(data => {
         this.setState({
@@ -77,7 +78,7 @@ class HistoryView extends Component {
   }
 
   componentDidMount () {
-    let hikes = this.getHikes()
+    this.getHikes()
   }
 
   render () {

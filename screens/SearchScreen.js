@@ -1,6 +1,5 @@
 import React from 'react'
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
-import { ExpoLinksView } from '@expo/samples'
+import { ScrollView, StyleSheet } from 'react-native'
 import ListView from '../components/ListView'
 
 export default function SearchScreen () {
