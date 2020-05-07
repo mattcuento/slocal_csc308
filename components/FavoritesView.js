@@ -66,7 +66,7 @@ class FavoritesView extends Component {
   }
 
   async getHikes () {
-    const hikes = await axios.get('https://slo-explore-308.herokuapp.com/')
+    await axios.get('https://slo-explore-308.herokuapp.com/')
       .then(res => res.data)
       .then(data => {
         this.setState({
@@ -79,7 +79,7 @@ class FavoritesView extends Component {
   }
 
   componentDidMount () {
-    const hikes = this.getHikes()
+    this.getHikes()
   }
 
   render () {

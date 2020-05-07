@@ -1,17 +1,9 @@
 
-import React, { Component } from 'react'
-import axios from 'axios'
+import React from 'react'
 import {
-  SafeAreaView,
   TouchableOpacity,
-  Button,
-  FlatList,
-  StyleSheet,
   Text, Image, View
 } from 'react-native'
-import { Ionicons } from '@expo/vector-icons'
-import Colors from '../constants/Colors'
-import Constants from 'expo-constants'
 // import { useNavigation } from '@react-navigation/native';
 import { useNavigation } from 'react-navigation-hooks'
 
