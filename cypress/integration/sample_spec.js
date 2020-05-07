@@ -8,6 +8,6 @@ describe('My First Test', function () {
 
 describe('Visit test', function () {
   it('Visits a website', function () {
-    cy.visit('https://twitter.com/')
+    cy.visit('https://localhost:19006')
   })
 })
