@@ -8,10 +8,12 @@ import {
   StyleSheet,
   Text, Image, View
 } from 'react-native'
+
 import Constants from 'expo-constants'
 // import { useNavigation } from '@react-navigation/native';
 import { withNavigation } from 'react-navigation'
 import { useNavigation } from 'react-navigation-hooks'
+
 
 function Item({ image, name, rate, loc, diff, selected, onSelect, details, ...props }) {
   const { navigate } = useNavigation()
