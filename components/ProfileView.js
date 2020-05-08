@@ -1,43 +1,39 @@
-import React, { Component } from 'react';
-import { withNavigation } from 'react-navigation';
-import { 
+import React, { Component } from 'react'
+import { withNavigation } from 'react-navigation'
+import {
   Text,
-  TextInput, 
-  ScrollView, 
-  KeyboardAvoidingView, 
+  ScrollView,
   TouchableOpacity,
   View,
-  Button,
   StyleSheet,
-  ImageBackground,
   Image
-} from 'react-native';
+} from 'react-native'
 
 export class ProfileView extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
+    this.state = {
+      name: 'Gramps',
+      hikes: 231,
+      joinDate: 'March 18th, 2020',
+      bio: 'SLO based grandfather trying to hike with my grandkids!'
+    }
   }
 
-  state = {
-    name: 'Gramps',
-    hikes: 231,
-    joinDate: 'March 18th, 2020',
-    bio: 'SLO based grandfather trying to hike with my grandkids!',
-  };
-
-  componentDidMount() {
-    //fetching data and storing to variable
+  componentDidMount () {
+    // fetching data and storing to variable
     const newStateContentY = fetch('/profile')
-     .then(response => response.json());
+      .then(response => response.json())
 
     this.setState({
-      //maintaining old state content which is declared above
+      // maintaining old state content which is declared above
       text: this.state.text,
-      //assigning the fetch data to state variable y below
+      // assigning the fetch data to state variable y below
       y: newStateContentY
-    });
+    })
   }
-  render() {
+
+  render () {
     return (
       <>
         <ScrollView style={styles.mainContainer}>
@@ -48,19 +44,19 @@ export class ProfileView extends Component {
             <Text style={styles.nameText}>{this.state.name}</Text>
             <View style={styles.textSpacer}>
             </View>
-            <Text style={{marginLeft: 5}}>
+            <Text style={{ marginLeft: 5 }}>
               <Text style={styles.headerText}>Hikes Completed: </Text>
               <Text style={styles.buttonText}>{this.state.hikes}</Text>
             </Text>
-            <Text style={{marginLeft: 5}}>
+            <Text style={{ marginLeft: 5 }}>
               <Text style={styles.headerText}>Joined On: </Text>
               <Text style={styles.buttonText}>{this.state.joinDate}</Text>
             </Text>
-            <Text style={{marginLeft: 5, paddingBottom: 5}}>
+            <Text style={{ marginLeft: 5, paddingBottom: 5 }}>
               <Text style={styles.headerText}>Bio:</Text>
-              <Text style={{fontSize: 18}}>{this.state.bio}</Text>
+              <Text style={{ fontSize: 18 }}>{this.state.bio}</Text>
             </Text>
-          </View>  
+          </View>
           <View style={styles.mainContainer}>
             <TouchableOpacity style={styles.buttonContainer}
               onPress={() => this.props.navigation.navigate('Favorites')}>
@@ -78,31 +74,31 @@ export class ProfileView extends Component {
           </View>
         </ScrollView>
       </>
-    );
+    )
   }
 }
 
 export class Avatar extends Component {
-  render() {
+  render () {
     return (
       <Image
-        resizeMode="contain" 
-        source={require('../assets/images/gramps.png')} 
+        resizeMode="contain"
+        source={require('../assets/images/gramps.png')}
         style={styles.avatarImage}
-      />        
-    );
+      />
+    )
   }
 }
 
 const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: 'seagreen',
-    flex: 1,
+    flex: 1
   },
   avatarContainer: {
     backgroundColor: 'seagreen',
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   avatarImage: {
     width: 200,
@@ -119,7 +115,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     marginLeft: 20,
-    marginRight: 20,
+    marginRight: 20
   },
   infoContainer: {
     flex: 1,
@@ -127,25 +123,25 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     marginLeft: 20,
-    marginRight: 20,
+    marginRight: 20
   },
   buttonText: {
-    fontSize: 24, 
-    marginLeft: 5,
+    fontSize: 24,
+    marginLeft: 5
   },
   headerText: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
   nameText: {
     fontSize: 30,
     fontWeight: 'bold',
-    marginLeft: 5,
+    marginLeft: 5
   },
   textSpacer: {
     backgroundColor: '#f0e68c',
     marginTop: 15
   }
-});
+})
 
-export default withNavigation(ProfileView);
+export default withNavigation(ProfileView)

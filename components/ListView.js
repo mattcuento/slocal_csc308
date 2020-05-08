@@ -7,8 +7,6 @@ import {
   StyleSheet,
   Text, Image, View
 } from 'react-native'
-import { Ionicons } from '@expo/vector-icons'
-import Colors from '../constants/Colors'
 import Constants from 'expo-constants'
 // import { useNavigation } from '@react-navigation/native';
 import { useNavigation } from 'react-navigation-hooks'
@@ -68,7 +66,7 @@ class ListView extends Component {
   }
 
   async getHikes () {
-    const hikes = await axios.get('https://slo-explore-308.herokuapp.com/list')
+    await axios.get('https://slo-explore-308.herokuapp.com/list')
       .then(res => res.data)
       .then(data => {
         this.setState({
@@ -82,7 +80,7 @@ class ListView extends Component {
   }
 
   componentDidMount () {
-    const hikes = this.getHikes()
+    this.getHikes()
   }
 
   render () {

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 import {
   SafeAreaView,
   TouchableOpacity,
@@ -6,36 +7,10 @@ import {
   StyleSheet,
   Text, Image, View
 } from 'react-native'
-import { Ionicons } from '@expo/vector-icons'
-import Colors from '../constants/Colors'
+
 import Constants from 'expo-constants'
 // import { useNavigation } from '@react-navigation/native';
 import { useNavigation } from 'react-navigation-hooks'
-
-const data1 = [{ name: "Bishop's Peak", date: '3/19/2020', image: 'https://www.hikespeak.com/img/Central-Coast/SLO/Bishop_Peak/Bishop_Peak_Trail_IMG_6637.jpg' },
-  { name: 'Madonna', date: '4/1/2019', image: 'https://www.hikespeak.com/img/Central-Coast/SLO/Madonna/Cerro_San_Luis_Trail_IMG_0763.jpg' },
-  { name: 'Cal Poly P', diff: '8/14/2019', image: 'https://magazine.calpoly.edu/wp-content/uploads/2015/10/Protecting-the-P1.jpg' }]
-
-/* constructor(props) {
-	super(props);
-	this.state = { isLoading: true }
-}
-
-componentDidMount() {
-	fetch('/list')
-	.then((response) => response.json())
-	.then((responseJson)) => {
-		this.setState({
-			isLoading: false,
-			dataSource: responseJson
-		}, function() {
-
-		});
-	})
-	.catch((error) => {
-		console.log('List View Data Error.');
-	});
-} */
 
 function Item ({ image, name, time, selected, onSelect, ...props }) {
   const { navigate } = useNavigation()
@@ -76,7 +51,7 @@ function Item ({ image, name, time, selected, onSelect, ...props }) {
   )
 }
 
-class ListView extends Component {
+class HistoryView extends Component {
   constructor (props) {
     super(props)
 
@@ -90,7 +65,7 @@ class ListView extends Component {
   }
 
   async getHikes () {
-    const hikes = await axios.get('http://localhost:9000/list')
+    await axios.get('https://slo-explore-308.herokuapp.com/')
       .then(res => res.data)
       .then(data => {
         this.setState({
@@ -103,7 +78,7 @@ class ListView extends Component {
   }
 
   componentDidMount () {
-    const hikes = this.getHikes()
+    this.getHikes()
   }
 
   render () {
@@ -145,4 +120,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default ListView
+export default HistoryView

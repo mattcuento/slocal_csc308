@@ -21,9 +21,7 @@ export default function HomeScreen () {
         <View style={styles.welcomeContainer}>
           <Image
             source={
-              __DEV__
-                ? require('../assets/images/robot-dev.png')
-                : require('../assets/images/robot-prod.png')
+              require('../assets/images/robot-dev.png')
             }
             style={styles.welcomeImage}
           />
@@ -74,26 +72,18 @@ HomeScreen.navigationOptions = {
 }
 
 function DevelopmentModeNotice () {
-  if (__DEV__) {
-    const learnMoreButton = (
-      <Text onPress={handleLearnMorePress} style={styles.helpLinkText}>
+  const learnMoreButton = (
+    <Text onPress={handleLearnMorePress} style={styles.helpLinkText}>
         Learn more
-      </Text>
-    )
+    </Text>
+  )
 
-    return (
-      <Text style={styles.developmentModeText}>
+  return (
+    <Text style={styles.developmentModeText}>
         Development mode is enabled: your app will be slower but you can use
         useful development tools. {learnMoreButton}
-      </Text>
-    )
-  } else {
-    return (
-      <Text style={styles.developmentModeText}>
-        You are not in development mode: your app will run at full speed.
-      </Text>
-    )
-  }
+    </Text>
+  )
 }
 
 function handleLearnMorePress () {

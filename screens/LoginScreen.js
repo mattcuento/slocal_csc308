@@ -8,7 +8,6 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   View,
-  Button,
   StyleSheet,
   ImageBackground
 } from 'react-native'
