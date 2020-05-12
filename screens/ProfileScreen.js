@@ -1,5 +1,4 @@
 import React from 'react'
-import { StyleSheet } from 'react-native'
 import ProfileView from '../components/ProfileView'
 
 export default function ProfileScreen () {
@@ -11,9 +10,3 @@ export default function ProfileScreen () {
 ProfileScreen.navigationOptions = {
   title: 'Profile'
 }
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'seagreen'
-  }
-})

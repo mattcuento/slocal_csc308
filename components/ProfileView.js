@@ -21,16 +21,6 @@ export class ProfileView extends Component {
   }
 
   componentDidMount () {
-    // fetching data and storing to variable
-    const newStateContentY = fetch('/profile')
-      .then(response => response.json())
-
-    this.setState({
-      // maintaining old state content which is declared above
-      text: this.state.text,
-      // assigning the fetch data to state variable y below
-      y: newStateContentY
-    })
   }
 
   render () {
