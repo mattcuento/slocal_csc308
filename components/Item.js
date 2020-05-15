@@ -1,49 +1,77 @@
 
-import React from 'react'
+import React, { Component } from 'react'
 import {
   TouchableOpacity,
-  Text, Image, View
+  Text, Image, View,
+  StyleSheet
 } from 'react-native'
-// import { useNavigation } from '@react-navigation/native';
 import { useNavigation } from 'react-navigation-hooks'
 
-function Item ({ image, name, rate, loc, diff, selected, onSelect, details, ...props }) {
-  const { navigate } = useNavigation()
+class Item extends Component {
+  render () {
+    const { navigation } = this.props
 
-  return (
-    <TouchableOpacity
+    return (
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Hike')}
+        style={[
+          styles.item,
+          { backgroundColor: this.props.selected ? '#EEEEEE' : '#FFFFFF' }
+        ]}
+      >
+        <View style={styles.row}>
+          <Image
+            source = {{ uri: 'https://via.placeholder.com/150' }}
+            style={styles.image}>
+          </Image>
 
-      onPress={() => navigate('Hike')}
-
-      style={[
-        styles.item,
-        { backgroundColor: selected ? '#bdb76b' : '#f0e68c' }
-      ]}
-    >
-      <View style= {{
-        flex: 1,
-        flexDirection: 'row'
-
-      }}>
-        <Image
-          source = {{ uri: image }}
-          style = {{ width: 200, height: 200, marginHorizontal: 10 }}>
-        </Image>
-
-        <View style = {{
-          flex: 1,
-          flexDirection: 'column'
-        }}>
-
-          <Text style={styles.name}>{name}</Text>
-          <Text style={styles.name}>Location: {loc}</Text>
-          <Text style={styles.name}>Rating: {rate}</Text>
-          <Text style={styles.name}>Difficulty: {diff}</Text>
-          <Text style={styles.name}>Description: {details}</Text>
+          <View style={styles.column}>
+            <Text style={styles.nameText}>{this.props.name}</Text>
+            <Text>Rating: <Text style={styles.rating}>{this.props.rating}</Text></Text>
+            <Text style={styles.description}>Description: {this.props.description}</Text>
+          </View>
         </View>
-
-      </View>
-
-    </TouchableOpacity>
-  )
+      </TouchableOpacity>
+    )
+  }
 }
+
+export default function (props) {
+  const navigation = useNavigation()
+  return <Item {...props} navigation={navigation}/>
+}
+
+const styles = StyleSheet.create({
+  item: {
+    backgroundColor: '#BBBBBB',
+    borderRadius: 5,
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16
+  },
+  nameText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 5
+  },
+  rating: {
+    color: '#FF0000',
+    marginVertical: 3
+  },
+  column: {
+    flex: 1,
+    flexDirection: 'column'
+  },
+  image: {
+    marginRight: 10,
+    width: 125,
+    height: 125
+  },
+  row: {
+    flex: 1,
+    flexDirection: 'row'
+  },
+  description: {
+    marginVertical: 3
+  }
+})

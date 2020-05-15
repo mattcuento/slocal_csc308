@@ -5,8 +5,9 @@ import {
   TouchableOpacity,
   FlatList,
   StyleSheet,
-  Text, Image, View
+  Text, Image, View, Button
 } from 'react-native'
+import { withNavigation } from 'react-navigation'
 
 import Constants from 'expo-constants'
 // import { useNavigation } from '@react-navigation/native';
@@ -84,6 +85,10 @@ class HistoryView extends Component {
   render () {
     return (
       <SafeAreaView style={styles.container}>
+        <Button
+          onPress={() => this.props.navigation.navigate('ProfileStack')}
+          title='Back'
+        />
         <FlatList
           data={this.state.hikes}
           renderItem={({ item }) => (
@@ -120,4 +125,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default HistoryView
+export default withNavigation(HistoryView)

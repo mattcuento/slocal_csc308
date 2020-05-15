@@ -21,16 +21,6 @@ export class ProfileView extends Component {
   }
 
   componentDidMount () {
-    // fetching data and storing to variable
-    const newStateContentY = fetch('/profile')
-      .then(response => response.json())
-
-    this.setState({
-      // maintaining old state content which is declared above
-      text: this.state.text,
-      // assigning the fetch data to state variable y below
-      y: newStateContentY
-    })
   }
 
   render () {
@@ -62,12 +52,14 @@ export class ProfileView extends Component {
               onPress={() => this.props.navigation.navigate('Favorites')}>
               <Text style={styles.buttonText}>Favorites</Text>
             </TouchableOpacity>
-            <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.buttonContainer}
+              onPress={() => this.props.navigation.navigate('History')}>
               <Text style={styles.buttonText}>History</Text>
-            </View>
-            <View style={styles.buttonContainer}>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonContainer}
+              onPress={() => this.props.navigation.navigate('Settings')}>
               <Text style={styles.buttonText}>Settings</Text>
-            </View>
+            </TouchableOpacity>
             <View style={styles.buttonContainer}>
               <Text style={styles.buttonText}>Logout</Text>
             </View>
