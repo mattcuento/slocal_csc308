@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { withNavigation } from 'react-navigation'
 import {
-  View,
   Button,
   StyleSheet,
   ImageBackground, SafeAreaView

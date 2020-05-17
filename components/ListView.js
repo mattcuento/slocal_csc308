@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { SearchBar } from 'react-native-elements'
 import axios from 'axios'
 import Item from './Item'
 import {
@@ -15,10 +16,40 @@ class ListView extends Component {
     this.state = {
       selected: null,
       isLoading: true,
-      hikes: []
+      hikes: [],
+      text: ''
     }
 
+    this.arrayholder = []
     this.getHikes = this.getHikes.bind(this)
+    this.searchData = this.searchData.bind(this)
+    this.renderHeader = this.renderHeader.bind(this)
+  }
+
+  searchData (text) {
+    const newData = this.arrayholder.filter(item => {
+      const itemData = `${item.name.toUpperCase()}   
+      ${item.name.toUpperCase()} ${item.name.toUpperCase()}`
+
+      const textData = text.toUpperCase()
+
+      return itemData.indexOf(textData) > -1
+    })
+    this.setState({ hikes: newData, text: text })
+  }
+
+  renderHeader () {
+    return (
+
+      <SearchBar
+        placeholder="Type Here..."
+        lightTheme
+        round
+        onChangeText={text => this.searchData(text)}
+        value= {this.state.text}
+        autoCorrect={false}
+      />
+    )
   }
 
   async getHikes () {
@@ -29,6 +60,8 @@ class ListView extends Component {
           selected: null,
           isLoading: false,
           hikes: data
+        }, () => {
+          this.arrayholder = data
         })
         console.log(data)
       })
@@ -57,6 +90,7 @@ class ListView extends Component {
             )}
             keyExtractor={item => item._id}
             extraData={this.state.selected}
+            ListHeaderComponent={this.renderHeader}
           />
         </View>
       )

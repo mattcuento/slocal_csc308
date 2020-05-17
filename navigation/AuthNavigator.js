@@ -4,6 +4,7 @@ import {
 } from 'react-navigation-stack'
 
 import LoginScreen from '../screens/LoginScreen'
+import LoginScreen2 from '../screens/LoginScreen2'
 import RegisterScreen from '../screens/RegisterScreen'
 import WelcomeScreen from '../screens/WelcomeScreen'
 import FavoritesScreen from '../screens/FavoritesScreen'
@@ -17,6 +18,7 @@ const AuthNavigator = createStackNavigator(
   {
     Welcome: WelcomeScreen,
     Login: LoginScreen,
+    Login2: LoginScreen2,
     Register: RegisterScreen,
     Favorites: FavoritesScreen
   },
