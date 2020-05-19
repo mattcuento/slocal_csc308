@@ -11,3 +11,9 @@ describe('Visit test', function () {
     cy.visit('http://localhost:19006')
   })
 })
+
+describe('SLO Explore', function () {
+  it('Visits SLO Explore', function () {
+    cy.visit('http://192.168.1.19:19012/')
+  })
+})
