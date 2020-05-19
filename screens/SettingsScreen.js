@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { withNavigation } from 'react-navigation'
 import {
-  View,
   Button,
   StyleSheet,
-  ImageBackground
+  ImageBackground, SafeAreaView
 } from 'react-native'
 
 export class Background extends Component {
@@ -22,31 +21,28 @@ export class Background extends Component {
 export class Settings extends Component {
   render () {
     return (
-      <View style={styles.wrapper}>
-        <View style={{ marginTop: 40 }}>
-          <View style={styles.buttonStyle}>
-            <Button
-              title="Location Services"
-              color="darkcyan"
-              onPress={() => this.props.navigation.navigate('Register')}
-            />
-          </View>
-          <View style={styles.buttonStyle}>
-            <Button
-              title="Clear Data"
-              color="darkcyan"
-              onPress={() => this.props.navigation.navigate('Register')}
-            />
-          </View>
-          <View style={styles.buttonStyle}>
-            <Button
-              title="Log Out"
-              color="darkcyan"
-              onPress={() => this.props.navigation.navigate('Welcome')}
-            />
-          </View>
-        </View>
-      </View>
+      <SafeAreaView style={styles.container}>
+        <Button
+          onPress={() => this.props.navigation.navigate('ProfileStack')}
+          title='Back'
+        />
+        <Button
+          title="Location Services"
+          color="darkcyan"
+          onPress={() => this.props.navigation.navigate('Register')}
+        />
+
+        <Button
+          title="Clear Data"
+          color="darkcyan"
+          onPress={() => this.props.navigation.navigate('Register')}
+        />
+        <Button
+          title="Log Out"
+          color="darkcyan"
+          onPress={() => this.props.navigation.navigate('Welcome')}
+        />
+      </SafeAreaView>
     )
   }
 }

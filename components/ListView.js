@@ -1,56 +1,13 @@
 import React, { Component } from 'react'
+import { SearchBar } from 'react-native-elements'
 import axios from 'axios'
+import Item from './Item'
 import {
-  SafeAreaView,
-  TouchableOpacity,
   FlatList,
   StyleSheet,
-  Text, Image, View
+  View,
+  Text
 } from 'react-native'
-import Constants from 'expo-constants'
-// import { useNavigation } from '@react-navigation/native';
-import { useNavigation } from 'react-navigation-hooks'
-
-function Item ({ image, name, rating, coordinates, difficulty, selected, onSelect, description, ...props }) {
-  const { navigate } = useNavigation()
-
-  return (
-    <TouchableOpacity
-
-      onPress={() => navigate('Settings')}
-
-      style={[
-        styles.item,
-        { backgroundColor: selected ? '#bdb76b' : '#f0e68c' }
-      ]}
-    >
-      <View style= {{
-        flex: 1,
-        flexDirection: 'row'
-
-      }}>
-        <Image
-          source = {{ uri: image }}
-          style = {{ width: 200, height: 200, marginHorizontal: 10 }}>
-        </Image>
-
-        <View style = {{
-          flex: 1,
-          flexDirection: 'column'
-        }}>
-
-          <Text style={styles.name}>{name}</Text>
-          <Text style={styles.name}>Location: {coordinates}</Text>
-          <Text style={styles.name}>Rating: {rating}</Text>
-          <Text style={styles.name}>Difficulty: {difficulty}</Text>
-          <Text style={styles.name}>Description: {description}</Text>
-        </View>
-
-      </View>
-
-    </TouchableOpacity>
-  )
-}
 
 class ListView extends Component {
   constructor (props) {
@@ -59,20 +16,52 @@ class ListView extends Component {
     this.state = {
       selected: null,
       isLoading: true,
-      hikes: []
+      hikes: [],
+      text: ''
     }
 
+    this.arrayholder = []
     this.getHikes = this.getHikes.bind(this)
+    this.searchData = this.searchData.bind(this)
+    this.renderHeader = this.renderHeader.bind(this)
+  }
+
+  searchData (text) {
+    const newData = this.arrayholder.filter(item => {
+      const itemData = `${item.name.toUpperCase()}   
+      ${item.name.toUpperCase()} ${item.name.toUpperCase()}`
+
+      const textData = text.toUpperCase()
+
+      return itemData.indexOf(textData) > -1
+    })
+    this.setState({ hikes: newData, text: text })
+  }
+
+  renderHeader () {
+    return (
+
+      <SearchBar
+        placeholder="Type Here..."
+        lightTheme
+        round
+        onChangeText={text => this.searchData(text)}
+        value= {this.state.text}
+        autoCorrect={false}
+      />
+    )
   }
 
   async getHikes () {
-    await axios.get('https://slo-explore-308.herokuapp.com/list')
+    await axios.get('https://slo-explore-308.herokuapp.com/list/location/all/detail')
       .then(res => res.data)
       .then(data => {
         this.setState({
           selected: null,
           isLoading: false,
           hikes: data
+        }, () => {
+          this.arrayholder = data
         })
         console.log(data)
       })
@@ -84,44 +73,50 @@ class ListView extends Component {
   }
 
   render () {
-    return (
-      <SafeAreaView style={styles.container}>
-        <FlatList
-          data={this.state.hikes}
-          renderItem={({ item }) => (
-            <Item
-              image = {item.image}
-              name={item.name}
-              rate={item.rating}
-              loc = {item.coordinates}
-              diff = {item.difficulty}
-              details = {item.description}
-              navigation={this.props}
-            // selected={!!this.state.selected.get(item.name)}
-            // onSelect={onSelect}
-            />
-          )}
-          keyExtractor={item => item.name}
-          extraData={this.state.selected}
-        />
-      </SafeAreaView>
-    )
+    if (!this.state.isLoading) {
+      return (
+        <View style={styles.container}>
+          <FlatList
+            data={this.state.hikes}
+            renderItem={({ item }) => (
+              <Item
+                image = {item.image}
+                name={item.name}
+                rating ={item.rating}
+                description = {item.description}
+              // selected={!!this.state.selected.get(item.name)}
+              // onSelect={onSelect}
+              />
+            )}
+            keyExtractor={item => item._id}
+            extraData={this.state.selected}
+            ListHeaderComponent={this.renderHeader}
+          />
+        </View>
+      )
+    } else {
+      return (
+        <View style={styles.loadView}>
+          <Text style={styles.loadText}>
+            Loading...
+          </Text>
+        </View>
+      )
+    }
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: Constants.statusBarHeight
+  loadView: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%',
+    width: '100%'
   },
-  item: {
-    backgroundColor: '#f0e68c',
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16
-  },
-  title: {
-    fontSize: 32
+  loadText: {
+    color: '#FFF',
+    opacity: 0.7,
+    fontSize: 60
   }
 })
 
