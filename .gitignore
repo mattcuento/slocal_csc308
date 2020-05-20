@@ -1,3 +1,2 @@
 node_modules
-.expo
-babel.config.js
+cypress/videos
