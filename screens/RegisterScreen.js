@@ -1,172 +1,59 @@
 import React, { Component } from 'react'
-import { PropTypes } from 'prop-types'
-import Icon from 'react-native-vector-icons/FontAwesome'
-import { withNavigation } from 'react-navigation'
 import {
-  Text,
-  TouchableHighlight,
-  TextInput,
   ScrollView,
-  KeyboardAvoidingView,
-  View,
-  StyleSheet,
-  ImageBackground
+  StyleSheet
 } from 'react-native'
+import RegisterView from '../components/RegisterView'
 
-export class RegisterBackground extends Component {
+export default class RegisterScreen extends Component {
   render () {
     return (
-      <ImageBackground
-        style={styles.imageStyle}
-        source={require('../assets/images/slo-background.jpg')}>
-        { <Register navigation={this.props.navigation}/> }
-      </ImageBackground>
+      <ScrollView style={styles.container}>
+        <RegisterView/>
+      </ScrollView>
     )
   }
-}
-
-export class Register extends Component {
-  render () {
-    return (
-      <KeyboardAvoidingView style={styles.wrapper} behavior="padding">
-        <View style={styles.scrollViewWrapper}>
-          <ScrollView>
-            <Text style={styles.loginText}>SLO Explore Registration</Text>
-            <CredentialEntry text='Email:'/>
-            <CredentialEntry text='Username:'/>
-            <PasswordEntry text='Password:'/>
-            <PasswordEntry text='Re-enter password:'/>
-          </ScrollView>
-          <LoginButton navigation={this.props.navigation}/>
-        </View>
-      </KeyboardAvoidingView>
-    )
-  }
-}
-
-export class CredentialEntry extends Component {
-  constructor (props) {
-    super(props)
-    this.state = { text: '' }
-  }
-
-  render () {
-    return (
-      <View style={styles.textWrapper}>
-        <Text style={styles.credentialText}>{this.props.text}</Text>
-        <TextInput style={styles.credentialStyle}
-          onChangeText={(text) => this.setState({ text })}
-          value={this.state.text}
-        />
-      </View>
-    )
-  }
-}
-
-export class PasswordEntry extends Component {
-  constructor (props) {
-    super(props)
-    this.state = { text: '' }
-  }
-
-  render () {
-    return (
-      <View style={styles.textWrapper}>
-        <Text style={styles.credentialText}>{this.props.text}</Text>
-        <TextInput secureTextEntry={true} style={styles.credentialStyle}
-          onChangeText={(text) => this.setState({ text })}
-          value={this.state.text}
-        />
-      </View>
-    )
-  }
-}
-
-export class LoginButton extends Component {
-  render () {
-    return (
-      <View style={styles.buttonWrapper}>
-        <TouchableHighlight style={styles.buttonStyle}
-          onPress={() => this.props.navigation.navigate('SearchStack')}>
-          <Icon
-            name="angle-right"
-            color="white"
-            size={32}
-            style={styles.iconStyle}
-          />
-        </TouchableHighlight>
-      </View>
-    )
-  }
-}
-
-LoginButton.propTypes = {
-  disabled: PropTypes.bool,
-  handleNextButton: PropTypes.func
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
+  imageWrapper: {
     display: 'flex',
     flex: 1
   },
-  textWrapper: {
+  descWrapper: {
     display: 'flex',
-    flex: 1,
-    paddingLeft: 30
+    flex: 2,
+    backgroundColor: 'seagreen'
   },
-  scrollViewWrapper: {
-    marginTop: 40,
-    flex: 1
+  nameStyle: {
+    fontSize: 50,
+    fontWeight: '800'
   },
-  loginText: {
-    fontSize: 30,
-    color: 'white',
-    fontWeight: '400',
-    marginBottom: 10,
-    paddingLeft: 26,
-    paddingRight: 30,
-    paddingTop: 20,
-    textShadowColor: 'darkcyan',
-    textShadowRadius: 6
+  descStyle: {
+    fontSize: 18,
+    fontWeight: '400'
   },
-  credentialText: {
-    color: 'darkcyan',
-    fontWeight: '300'
-  },
-  credentialStyle: {
-    color: 'black',
-    borderBottomColor: 'darkcyan',
-    borderBottomWidth: 2,
-    height: 30,
-    marginRight: 60,
-    marginBottom: 12
-  },
-  buttonWrapper: {
-    alignItems: 'flex-end',
-    right: 20,
-    bottom: 20,
-    paddingTop: 0
+  gearWrapper: {
+    display: 'flex',
+    flex: 1.5,
+    backgroundColor: 'seagreen'
   },
   buttonStyle: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 50,
-    width: 60,
-    height: 60,
-    backgroundColor: 'green',
-    opacity: 0.6
-  },
-  iconStyle: {
-    marginRight: -2,
-    marginTop: -2
+    marginBottom: 30,
+    marginLeft: 90,
+    height: 30,
+    width: 100
   },
   imageStyle: {
     flex: 1,
     alignSelf: 'stretch',
     width: undefined,
     height: undefined
+  },
+  gearStyle: {
+    flex: 1,
+    alignSelf: 'stretch',
+    width: 140,
+    height: 90
   }
 })
-
-export default withNavigation(RegisterBackground)
