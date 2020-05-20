@@ -1,49 +1,31 @@
 import React, { Component } from 'react'
-import MapView, { Marker, Geojson } from 'react-native-maps'
 import {
   ScrollView,
   StyleSheet,
   Button,
+  Image,
   Text, View
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
 import { Divider, Icon, Card, registerCustomIconType } from 'react-native-elements'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-import { pathMarkers, pathInfo } from '../constants/MapMarkers.js'
 registerCustomIconType('font-awesome-5', FontAwesome5)
 
-class StatTrackerView extends Component {
+class HikeDetailsView extends Component {
   render () {
     return (
       <ScrollView style={styles.container}>
-        <View style={styles.mapView}>
-          <MapView style={styles.mapStyle}
-            initialRegion={{
-              latitude: 35.28275,
-              longitude: -120.65962,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421
-            }}>
-            {pathMarkers.map(marker => (
-              <Marker
-                key={marker.id}
-                coordinate={marker.coordinate}
-                title={marker.title}
-              />
-            ))}
-            <Geojson
-              geojson={pathInfo}
-              strokeColor="#E76355"
-              fillColor="#E76355"
-              strokeWidth={2}
-            />
-          </MapView>
+        <View style={styles.imageView}>
+          <Image
+            source = {require('../assets/images/p_hike.png')}
+            style={styles.imageStyle}>
+          </Image>
         </View>
         <View style={styles.divView}>
           <Divider style={styles.divStyle}/>
         </View>
         <View>
-          <Card title='Current Hike Details'>
+          <Card title={'The P'}>
             <View style={styles.infoView}>
               <Icon
                 name='clock'
@@ -108,12 +90,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#d6e9d7'
   },
-  mapView: {
+  imageView: {
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#d6e9d7'
   },
-  mapStyle: {
+  imageStyle: {
     width: 360,
     height: 320
   },
@@ -124,10 +106,6 @@ const styles = StyleSheet.create({
   },
   infoHeader: {
     fontSize: 20
-  },
-  mapImage: {
-    width: 400,
-    height: 320
   },
   divView: {
     marginTop: 15,
@@ -151,4 +129,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default withNavigation(StatTrackerView)
+export default withNavigation(HikeDetailsView)
