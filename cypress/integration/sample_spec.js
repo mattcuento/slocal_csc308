@@ -14,6 +14,13 @@ describe('Visit test', function () {
 
 describe('SLO Explore', function () {
   it('Visits SLO Explore', function () {
-    cy.visit('http://192.168.1.19:19012/')
+    //cy.visit('http://192.168.1.19:19012/')
+    cy.visit('http://192.168.0.16:19006/')
   })
 })
+
+/*describe('Visit Login', function () {
+  it('Visits Login Page', function () {
+    cy.visit('/')
+  })
+})*/
