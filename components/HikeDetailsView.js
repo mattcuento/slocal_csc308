@@ -15,6 +15,10 @@ class HikeDetailsView extends Component {
   render () {
     return (
       <ScrollView style={styles.container}>
+        <Button
+          onPress={() => this.props.navigation.navigate('SearchStack')}
+          title='Back'
+        />
         <View style={styles.imageView}>
           <Image
             source = {require('../assets/images/p_hike.png')}
