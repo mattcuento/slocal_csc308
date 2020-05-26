@@ -12,6 +12,7 @@ import {
   KeyboardAvoidingView
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
+import axios from 'axios'
 
 class RegisterView extends Component {
   constructor (props) {
@@ -19,10 +20,44 @@ class RegisterView extends Component {
 
     this.state = {
       email: '',
-      user: '',
-      pass: '',
-      passConfirm: ''
+      name: '',
+      password: '',
+      password2: '',
+      errors: {},
+      isAuthorized: false,
+      isLoading: false
     }
+    this.onPressLogin = this.onPressLogin.bind(this)
+  }
+
+  async onPressLogin () {
+    const { email, name, password, password2 } = this.state
+    const newUser = { email, name, password, password2 }
+    console.log(newUser)
+
+    const onSuccess = () => {
+      // Set JSON Web Token on success
+      this.setState({ isLoading: false, isAuthorized: true })
+      this.props.navigation.navigate('SearchStack')
+    }
+
+    const onFailure = error => {
+      console.log('here')
+      console.log(error)
+    }
+
+    // Show spinner when call is made
+    this.setState({ isLoading: true })
+
+    await axios.post('https://slo-explore-308.herokuapp.com/users/new',
+      {
+        email: email,
+        name: name,
+        password: password,
+        password2: password2
+      })
+      .then(onSuccess)
+      .catch(onFailure)
   }
 
   render () {
@@ -45,28 +80,29 @@ class RegisterView extends Component {
                 <View style={styles.textWrapper}>
                   <Text style={styles.credentialText}>{'Username:'}</Text>
                   <TextInput style={styles.credentialStyle}
-                    onChangeText={(user) => this.setState({ user })}
-                    value={this.state.user}
+                    onChangeText={(name) => this.setState({ name })}
+                    value={this.state.name}
                   />
                 </View>
                 <View style={styles.textWrapper}>
                   <Text style={styles.credentialText}>{'Password:'}</Text>
                   <TextInput secureTextEntry={true} style={styles.credentialStyle}
-                    onChangeText={(pass) => this.setState({ pass })}
-                    value={this.state.pass}
+                    onChangeText={(password) => this.setState({ password })}
+                    value={this.state.password}
                   />
                 </View>
                 <View style={styles.textWrapper}>
                   <Text style={styles.credentialText}>{'Confirm Password:'}</Text>
                   <TextInput secureTextEntry={true} style={styles.credentialStyle}
-                    onChangeText={(passConfirm) => this.setState({ passConfirm })}
-                    value={this.state.passConfirm}
+                    onChangeText={(password2) => this.setState({ password2 })}
+                    value={this.state.password2}
                   />
                 </View>
               </ScrollView>
               <View style={styles.buttonWrapper}>
                 <TouchableHighlight style={styles.buttonStyle}
-                  onPress={() => this.props.navigation.navigate('SearchStack')}>
+                  onPress={this.onPressLogin}>
+                  {/* onPress={() => this.props.navigation.navigate('SearchStack')} */}
                   <Icon
                     name="angle-right"
                     color="white"
