@@ -4,6 +4,7 @@ import {
   ScrollView,
   StyleSheet,
   Image,
+  Button,
   Text, View
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
