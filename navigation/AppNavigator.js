@@ -1,21 +1,32 @@
-import { createAppContainer, createSwitchNavigator } from 'react-navigation'
+import { createAppContainer } from 'react-navigation'
+import { createStackNavigator } from 'react-navigation-stack'
 
-import AuthNavigator from './AuthNavigator'
-import HikeNavigator from './HikeNavigator'
 import MainTabNavigator from './MainTabNavigator'
-import HistoryNavigator from './HistoryNavigator'
-import SettingsNavigator from './SettingsNavigator'
+import HistoryScreen from '../screens/HistoryScreen'
+import SettingsScreen from '../screens/SettingsScreen'
+import HikeDetails from '../screens/HikeDetails'
+import LoginScreen from '../screens/LoginScreen'
+import RegisterScreen from '../screens/RegisterScreen'
+import WelcomeScreen from '../screens/WelcomeScreen'
+import FavoritesScreen from '../screens/FavoritesScreen'
 
 export default createAppContainer(
-  createSwitchNavigator({
+  createStackNavigator({
     // You could add another route here for authentication.
     // Read more at https://reactnavigation.org/docs/en/auth-flow.html
 
-    Auth: AuthNavigator,
-    Hike: HikeNavigator,
-    History: HistoryNavigator,
-    Settings: SettingsNavigator,
-    Main: MainTabNavigator
-
-  })
+    Hike: HikeDetails,
+    History: HistoryScreen,
+    Settings: SettingsScreen,
+    Main: MainTabNavigator,
+    Login: LoginScreen,
+    Register: RegisterScreen,
+    Welcome: WelcomeScreen,
+    Favorites: FavoritesScreen
+  },
+  {
+    initialRouteName: 'Welcome',
+    headerMode: 'none'
+  }
+  )
 )

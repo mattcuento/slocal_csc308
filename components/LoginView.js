@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignSelf: 'stretch',
     width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height - 70
+    height: Dimensions.get('window').height
   }
 })
 
