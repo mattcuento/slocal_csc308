@@ -28,12 +28,12 @@ class HikeDetailsView extends Component {
         {
           title: 'N/A',
           text: 'N/A',
-          url: 'https://via.placholder.com/300'
+          url: 'https://via.placholder.com/150'
         },
         {
           title: 'N/A',
           text: 'N/A',
-          url: 'https://viaplacholder.com/150'
+          url: '"https://via.placholder.com/150"'
         }
       ]
     }
@@ -58,7 +58,7 @@ class HikeDetailsView extends Component {
       }}>
         <View style={styles.cardView}>
           <Image
-            source = {{ uri: item.url }}
+            source = {{ uri: 'https://via.placeholder.com/150' }}
             style={styles.cardStyle}
           >
           </Image>
@@ -81,6 +81,10 @@ class HikeDetailsView extends Component {
             title='Back'
           />
           <View style={styles.imageView}>
+            <Image
+              source = {{ uri: 'https://via.placeholder.com/150' }}
+              style={styles.imageStyle}>
+            </Image>
             <Image
               source = {require('../assets/images/p_hike.png')}
               style={styles.imageStyle}>
