@@ -12,6 +12,7 @@ import {
   KeyboardAvoidingView
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
+import { Card } from 'react-native-elements'
 
 class LoginView extends Component {
   constructor (props) {
@@ -32,21 +33,22 @@ class LoginView extends Component {
           <KeyboardAvoidingView style={styles.wrapper} behavior="padding">
             <View style={styles.scrollViewWrapper}>
               <ScrollView>
-                <Text style={styles.loginText}>SLO Explore Login</Text>
-                <View style={styles.textWrapper}>
-                  <Text style={styles.credentialText}>{'Username:'}</Text>
-                  <TextInput style={styles.credentialStyle}
-                    onChangeText={(user) => this.setState({ user })}
-                    value={this.state.user}
-                  />
-                </View>
-                <View style={styles.textWrapper}>
-                  <Text style={styles.credentialText}>{'Password:'}</Text>
-                  <TextInput secureTextEntry={true} style={styles.credentialStyle}
-                    onChangeText={(pass) => this.setState({ pass })}
-                    value={this.state.pass}
-                  />
-                </View>
+                <Card>
+                  <Text style={styles.loginText}>SLO Explore Login</Text>
+                  <View style={styles.textWrapper}>
+                    <Text style={styles.credentialText}>{'Username:'}</Text>
+                    <TextInput style={styles.credentialStyle}
+                      onChangeText={(user) => this.setState({ user })}
+                      value={this.state.user}
+                    />
+                  </View>
+                  <View style={styles.textWrapper}>
+                    <Text style={styles.credentialText}>{'Password:'}</Text>
+                    <TextInput secureTextEntry={true} style={styles.credentialStyle}
+                      onChangeText={(pass) => this.setState({ pass })}
+                      value={this.state.pass}
+                    />
+                  </View></Card>
               </ScrollView>
               <View style={styles.buttonWrapper}>
                 <TouchableHighlight style={styles.buttonStyle}
@@ -78,18 +80,18 @@ const styles = StyleSheet.create({
     paddingLeft: 30
   },
   scrollViewWrapper: {
-    marginTop: 40,
+    marginTop: '20%',
     flex: 1
   },
   loginText: {
     fontSize: 30,
-    color: 'white',
+    color: 'darkcyan',
     fontWeight: '400',
     marginBottom: 10,
     paddingLeft: 26,
     paddingRight: 30,
     paddingTop: 20,
-    textShadowColor: 'darkcyan',
+    textShadowColor: '#BBB',
     textShadowRadius: 6
   },
   credentialText: {
