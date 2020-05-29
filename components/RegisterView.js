@@ -38,7 +38,9 @@ class RegisterView extends Component {
     const onSuccess = () => {
       // Set JSON Web Token on success
       this.setState({ isLoading: false, isAuthorized: true })
-      this.props.navigation.navigate('SearchStack')
+      this.props.navigation.navigate('Main', {
+        name: this.state.name
+      })
     }
 
     const onFailure = error => {
@@ -179,7 +181,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignSelf: 'stretch',
     width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height - 70
+    height: Dimensions.get('window').height
   }
 })
 

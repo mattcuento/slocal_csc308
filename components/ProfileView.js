@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 import { withNavigation } from 'react-navigation'
 import {
   Text,
@@ -8,19 +9,39 @@ import {
   StyleSheet,
   Image
 } from 'react-native'
+import Axios from 'axios'
 
 export class ProfileView extends Component {
   constructor (props) {
     super(props)
+    console.log(props)
     this.state = {
-      name: 'Gramps',
-      hikes: 231,
-      joinDate: 'March 18th, 2020',
-      bio: 'SLO based grandfather trying to hike with my grandkids!'
+      name: '',
+      hikes: 0,
+      joinDate: '',
+      bio: ''
     }
+
+    this.getUser = this.getUser.bind(this)
+  }
+
+  async getUser () {
+    await axios.get('https://slo-explore-308.herokuapp.com/users/one')
+      .then(res => res.data)
+      .then(data => {
+        this.setState({
+          name: data.username,
+          hikes: 1,
+          joinDate: data.time,
+          bio: 'this worked',
+        })
+        console.log(data)
+      })
+      .catch(err => console.log(err))
   }
 
   componentDidMount () {
+    this.getUser()
   }
 
   render () {

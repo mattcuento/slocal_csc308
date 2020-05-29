@@ -13,7 +13,11 @@ class Item extends Component {
 
     return (
       <TouchableOpacity
-        onPress={() => navigation.navigate('Hike')}
+        onPress={() => navigation.navigate('Hike', {
+          hikeName: this.props.name,
+          hikeRating: this.props.rating,
+          hikeDescription: this.props.description
+        })}
         style={[
           styles.item,
           { backgroundColor: this.props.selected ? '#EEEEEE' : '#FFFFFF' }

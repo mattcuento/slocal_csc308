@@ -11,7 +11,8 @@ import {
   ImageBackground,
   KeyboardAvoidingView
 } from 'react-native'
-import { withNavigation } from 'react-navigation'
+import { NavigationActions, withNavigation } from 'react-navigation'
+import SearchScreen from '../screens/SearchScreen'
 
 class LoginView extends Component {
   constructor (props) {
@@ -50,7 +51,9 @@ class LoginView extends Component {
               </ScrollView>
               <View style={styles.buttonWrapper}>
                 <TouchableHighlight style={styles.buttonStyle}
-                  onPress={() => this.props.navigation.navigate('SearchStack')}>
+                  onPress={() => this.props.navigation.navigate('Main', {
+                    name: this.state.user
+                  })}>
                   <Icon
                     name="angle-right"
                     color="white"
@@ -127,7 +130,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignSelf: 'stretch',
     width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height - 70
+    height: Dimensions.get('window').height
   }
 })
 
