@@ -17,7 +17,11 @@ class Item extends Component {
           onPress={() => navigation.navigate('Hike', {
             hikeName: this.props.name,
             hikeRating: this.props.rating,
-            hikeDescription: this.props.description
+            hikeDescription: this.props.description,
+            id: this.props.id,
+            reviewIds: this.props.reviewIds,
+            photoPaths: this.props.photoPaths,
+            type: this.props.type
           })}
           style={[
             styles.item,

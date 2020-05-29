@@ -1,74 +1,68 @@
 import React, { Component } from 'react'
 import StarRating from 'react-native-star-rating'
+import { SliderBox } from 'react-native-image-slider-box'
 import {
   ScrollView,
   StyleSheet,
   Image,
   Button,
-  Text, View,
-  SafeAreaView
+  Text,
+  View
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
 import { Divider, Card, registerCustomIconType } from 'react-native-elements'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-import Carousel from 'react-native-snap-carousel'
+import axios from 'axios'
 registerCustomIconType('font-awesome-5', FontAwesome5)
 
 class HikeDetailsView extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      activeIndex: 0,
-      carouselItems: [
-        {
-          title: 'N/A',
-          text: 'N/A',
-          url: 'https://via.placholder.com/150'
-        },
-        {
-          title: 'N/A',
-          text: 'N/A',
-          url: 'https://via.placholder.com/150'
-        },
-        {
-          title: 'N/A',
-          text: 'N/A',
-          url: '"https://via.placholder.com/150"'
-        }
-      ]
+      images: [
+        'https://via.placeholder.com/300'
+      ],
+      isLoading: true,
+      id: null
     }
 
-    this._renderItem = this._renderItem.bind(this)
+    this.getHikeDetails = this.getHikeDetails.bind(this)
+    this.getReviewsFromIds = this.getReviewsFromIds.bind(this)
   }
 
-  _renderItem ({ item, index }) {
-    return (
-      <View style={{
-        backgroundColor: '#FFF',
-        borderRadius: 8,
-        height: 250,
-        paddingBottom: 50,
-        marginLeft: 5,
-        marginRight: 5,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.8,
-        shadowRadius: 2,
-        elevation: 1
-      }}>
-        <View style={styles.cardView}>
-          <Image
-            source = {{ uri: 'https://via.placeholder.com/150' }}
-            style={styles.cardStyle}
-          >
-          </Image>
-        </View>
-        <View style={styles.textWrapper}>
-          <Text style={{ fontSize: 30 }}>{item.title}</Text>
-          <Text>{item.text}</Text>
-        </View>
-      </View>
-    )
+  componentDidMount () {
+    this.getHikeDetails()
+    this.getReviewsFromIds()
+  }
+
+  async getReviewsFromIds () {
+    await axios.get('https://slo-explore-308.herokuapp.com/list/location/')
+      .then(res => res.data)
+      .then(data => {
+        this.setState({
+          ...this.state,
+          reviews: data
+        })
+      })
+  }
+
+  async getHikeDetails () {
+    // TODO need reviews and other stuff too or params
+    const { navigation } = this.props
+    const url = 'https://slo-explore-308.herokuapp.com/list/location/' + navigation.getParam('id', 0) + '/' + navigation.getParam('type', 0)
+    console.log(url)
+    await axios.get(url)
+      .then(res => res.data)
+      .then(data => {
+        this.setState({
+          isLoading: false,
+          images: data._photos,
+          reviewIds: data._reviews,
+          reviews: this.state.reviews
+        })
+        console.log(data)
+      })
+      .catch(err => console.log(err))
   }
 
   render () {
@@ -82,11 +76,7 @@ class HikeDetailsView extends Component {
           />
           <View style={styles.imageView}>
             <Image
-              source = {{ uri: 'https://via.placeholder.com/150' }}
-              style={styles.imageStyle}>
-            </Image>
-            <Image
-              source = {require('../assets/images/p_hike.png')}
+              source = {{ uri: this.state.images[0] }}
               style={styles.imageStyle}>
             </Image>
           </View>
@@ -125,22 +115,11 @@ class HikeDetailsView extends Component {
             </View>
           </Card>
           <Card title='Photos'>
-            <SafeAreaView style={{ flex: 1, paddingTop: 50, height: 260 }}>
-              <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
-                <Carousel
-                  layout={'default'}
-                  // eslint-disable-next-line no-return-assign
-                  ref={ ref => this.carousel = ref }
-                  data={this.state.carouselItems}
-                  sliderWidth={300}
-                  itemWidth={250}
-                  autoplay={true}
-                  layoutCardOffset={2}
-                  loop={true}
-                  renderItem={this._renderItem}
-                  onSnapToItem = { index => this.setState({ activeIndex: index }) } />
-              </View>
-            </SafeAreaView>
+            <View style={styles.imageContainer}>
+              <SliderBox images={this.state.images}
+                parentWidth={340}
+              ></SliderBox>
+            </View>
           </Card>
           <View style={{ marginTop: 40 }}>
           </View>
@@ -214,6 +193,10 @@ const styles = StyleSheet.create({
   },
   textWrapper: {
     paddingHorizontal: 10
+  },
+  imageContainer: {
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })
 
