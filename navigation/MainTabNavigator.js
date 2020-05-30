@@ -53,7 +53,14 @@ const tabNavigator = createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: 'Stat Tracker',
       tabBarIcon: ({ focused }) => (
-        <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-radio-button-on' : 'md-radio-button-on'} />
+        <TabBarIcon 
+          focused={focused} 
+          name={
+            Platform.OS === 'ios'
+              ? 'ios-radio-button-on' 
+              : 'md-radio-button-on'
+          } 
+        />
       )
     },
   },
@@ -63,7 +70,13 @@ const tabNavigator = createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: 'Profile',
       tabBarIcon: ({ focused }) => (
-        <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'} />
+        <TabBarIcon focused={focused} 
+          name={
+            Platform.OS === 'ios' 
+              ? 'ios-person' 
+              : 'md-person'
+          } 
+        />
       )
     }
   }
