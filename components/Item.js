@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react'
 import {
   TouchableOpacity,
@@ -10,7 +9,7 @@ import { useNavigation } from 'react-navigation-hooks'
 class Item extends Component {
   render () {
     const { navigation } = this.props
-
+    
     return (
       <TouchableOpacity
         onPress={() => navigation.navigate('Hike', {

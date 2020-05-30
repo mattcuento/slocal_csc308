@@ -3,8 +3,8 @@ import StarRating from 'react-native-star-rating'
 import {
   ScrollView,
   StyleSheet,
-  Button,
   Image,
+  Button,
   Text, View
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
@@ -15,7 +15,6 @@ registerCustomIconType('font-awesome-5', FontAwesome5)
 class HikeDetailsView extends Component {
   render () {
     const { navigation } = this.props
-    console.log(navigation)
     return (
       <ScrollView style={styles.container}>
         <View style={styles.button}>

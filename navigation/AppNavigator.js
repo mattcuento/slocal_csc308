@@ -23,11 +23,10 @@ export default createAppContainer(
     Register: RegisterScreen,
     Welcome: WelcomeScreen,
     Favorites: FavoritesScreen
-
   },
   {
     initialRouteName: 'Welcome',
     headerMode: 'none'
-  })
-
+  }
+  )
 )
