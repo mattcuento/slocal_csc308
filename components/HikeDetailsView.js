@@ -19,11 +19,10 @@ class HikeDetailsView extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      images: [
-        'https://via.placeholder.com/300'
-      ],
+      images: [],
       isLoading: true,
-      id: null
+      reviewIds: [],
+      reviews: []
     }
 
     this.getHikeDetails = this.getHikeDetails.bind(this)
@@ -32,11 +31,12 @@ class HikeDetailsView extends Component {
 
   componentDidMount () {
     this.getHikeDetails()
-    this.getReviewsFromIds()
   }
 
   async getReviewsFromIds () {
-    await axios.get('https://slo-explore-308.herokuapp.com/list/location/')
+    await axios.post('https://slo-explore-308.herokuapp.com/list/review/', {
+      reviewIds: this.state.reviewIds
+    })
       .then(res => res.data)
       .then(data => {
         this.setState({
@@ -44,23 +44,28 @@ class HikeDetailsView extends Component {
           reviews: data
         })
       })
+      .catch(err => console.log(err))
   }
 
   async getHikeDetails () {
     // TODO need reviews and other stuff too or params
     const { navigation } = this.props
+    let photos = ['https://via.placeholder.com/200']
     const url = 'https://slo-explore-308.herokuapp.com/list/location/' + navigation.getParam('id', 0) + '/' + navigation.getParam('type', 0)
     console.log(url)
     await axios.get(url)
       .then(res => res.data)
       .then(data => {
+        if (data._photos.length > 0) {
+          photos = data._photos
+        }
         this.setState({
           isLoading: false,
-          images: data._photos,
+          images: photos,
           reviewIds: data._reviews,
           reviews: this.state.reviews
         })
-        console.log(data)
+        this.getReviewsFromIds()
       })
       .catch(err => console.log(err))
   }
