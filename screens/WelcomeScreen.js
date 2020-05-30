@@ -7,6 +7,7 @@ import {
   StyleSheet,
   ImageBackground
 } from 'react-native'
+import { Card } from 'react-native-elements'
 
 export class Landing extends Component {
   render () {
@@ -23,54 +24,59 @@ export class Landing extends Component {
 export class Welcome extends Component {
   render () {
     return (
-      <View style={styles.wrapper}>
-        <View style={{ marginTop: 40 }}>
-          <Text style={styles.welcomeText}>SLO Explore</Text>
-          <View style={styles.buttonStyle}>
-            <Button
-              title="Sign Up"
-              color="darkcyan"
-              onPress={() => this.props.navigation.navigate('Register')}
-            />
+      <View style={styles.outer}>
+        <Card style={styles.wrapper}>
+          <View >
+            <Text style={styles.welcomeText}>SLO Explore</Text>
+            <View style={styles.buttonStyle}>
+              <Button
+                title="Sign Up"
+                color="darkcyan"
+                onPress={() => this.props.navigation.navigate('Register')}
+              />
+            </View>
+            <View style={styles.buttonStyle}>
+              <Button
+                title="Login"
+                color="darkcyan"
+                onPress={() => this.props.navigation.navigate('Login')}
+              />
+            </View>
           </View>
-          <View style={styles.buttonStyle}>
-            <Button
-              title="Login"
-              color="darkcyan"
-              onPress={() => this.props.navigation.navigate('Login')}
-            />
-          </View>
-        </View>
+        </Card>
       </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
+  outer: {
+    paddingTop: '20%'
+  },
   wrapper: {
     display: 'flex',
-    paddingTop: 40,
     flex: 1,
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   textWrapper: {
     display: 'flex',
-    flex: 1,
-    paddingLeft: 30
+    flex: 1
   },
   welcomeText: {
     fontSize: 50,
-    color: 'white',
+    color: 'darkcyan',
     fontWeight: '800',
-    marginBottom: 60,
-    textShadowColor: 'darkcyan',
-    textShadowRadius: 6
+    textShadowColor: '#BBB',
+    textShadowRadius: 6,
+    padding: 20,
+    textAlign: 'center'
   },
   buttonStyle: {
-    marginBottom: 30,
-    marginLeft: 90,
     height: 30,
-    width: 100
+    width: 100,
+    alignSelf: 'center',
+    margin: 15
   },
   imageStyle: {
     flex: 1,

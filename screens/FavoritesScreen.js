@@ -16,6 +16,6 @@ FavoritesScreen.navigationOptions = {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'seagreen'
+    backgroundColor: '#d6e9d7'
   }
 })

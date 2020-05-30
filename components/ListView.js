@@ -81,10 +81,14 @@ class ListView extends Component {
             data={this.state.hikes}
             renderItem={({ item }) => (
               <Item
+                id={item._id}
                 image = {item.image}
                 name={item.name}
                 rating ={item.rating}
                 description = {item.description}
+                type = {item.type}
+                reviewIds={item._reviews}
+                photoPaths={item._photos}
               // selected={!!this.state.selected.get(item.name)}
               // onSelect={onSelect}
               />
