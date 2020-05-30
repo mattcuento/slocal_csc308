@@ -28,9 +28,9 @@ const tabNavigator = createBottomTabNavigator({
           }
         />
       )
-    },
+    }
   },
-  
+
   Map: {
     screen: MapScreen,
     navigationOptions: {
@@ -45,7 +45,7 @@ const tabNavigator = createBottomTabNavigator({
           }
         />
       )
-    },
+    }
   },
 
   StatTracker: {
@@ -53,16 +53,16 @@ const tabNavigator = createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: 'Stat Tracker',
       tabBarIcon: ({ focused }) => (
-        <TabBarIcon 
-          focused={focused} 
+        <TabBarIcon
+          focused={focused}
           name={
             Platform.OS === 'ios'
-              ? 'ios-radio-button-on' 
+              ? 'ios-radio-button-on'
               : 'md-radio-button-on'
-          } 
+          }
         />
       )
-    },
+    }
   },
 
   Profile: {
@@ -70,12 +70,12 @@ const tabNavigator = createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: 'Profile',
       tabBarIcon: ({ focused }) => (
-        <TabBarIcon focused={focused} 
+        <TabBarIcon focused={focused}
           name={
-            Platform.OS === 'ios' 
-              ? 'ios-person' 
+            Platform.OS === 'ios'
+              ? 'ios-person'
               : 'md-person'
-          } 
+          }
         />
       )
     }

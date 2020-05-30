@@ -11,8 +11,7 @@ import {
   ImageBackground,
   KeyboardAvoidingView
 } from 'react-native'
-import { NavigationActions, withNavigation } from 'react-navigation'
-import SearchScreen from '../screens/SearchScreen'
+import { withNavigation } from 'react-navigation'
 
 class LoginView extends Component {
   constructor (props) {

@@ -10,7 +10,7 @@ export default function SearchScreen () {
         * we just wanted to provide you with some helpful links.
         */}
       <ListView/>
-  
+
     </ScrollView>
   )
 }
@@ -27,5 +27,5 @@ const styles = StyleSheet.create({
     backgroundColor: 'seagreen'
 
   }
-  
+
 })

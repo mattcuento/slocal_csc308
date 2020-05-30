@@ -32,7 +32,7 @@ export class ProfileView extends Component {
           name: data.username,
           hikes: 1,
           joinDate: data.time,
-          bio: 'this worked',
+          bio: 'this worked'
         })
         console.log(data)
       })
