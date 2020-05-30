@@ -52,7 +52,7 @@ class LoginView extends Component {
               <View style={styles.buttonWrapper}>
                 <TouchableHighlight style={styles.buttonStyle}
                   onPress={() => this.props.navigation.navigate('Main', {
-                    name: this.state.user
+                    username: this.state.user
                   })}>
                   <Icon
                     name="angle-right"

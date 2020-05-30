@@ -9,7 +9,6 @@ import {
   StyleSheet,
   Image
 } from 'react-native'
-import Axios from 'axios'
 
 export class ProfileView extends Component {
   constructor (props) {

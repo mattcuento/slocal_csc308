@@ -39,7 +39,7 @@ class RegisterView extends Component {
       // Set JSON Web Token on success
       this.setState({ isLoading: false, isAuthorized: true })
       this.props.navigation.navigate('Main', {
-        name: this.state.name
+        username: this.state.name
       })
     }
 
