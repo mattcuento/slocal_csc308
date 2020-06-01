@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react'
 import {
   TouchableOpacity,
@@ -6,6 +5,7 @@ import {
   StyleSheet
 } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
+import { Card } from 'react-native-elements'
 
 class Item extends Component {
   render () {
@@ -15,27 +15,36 @@ class Item extends Component {
     }
 
     return (
-      <TouchableOpacity
-        onPress={() => navigation.navigate('Hike')}
-        style={[
-          styles.item,
-          { backgroundColor: this.props.selected ? '#EEEEEE' : '#FFFFFF' }
-        ]}
-      >
-        <View style={styles.row}>
-          <Image
-            // source = {{ uri: 'https://via.placeholder.com/150' }}
-            source = {{ uri: this.props.image[0] }}
-            style={styles.image}>
-          </Image>
+      <Card>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Hike', {
+            hikeName: this.props.name,
+            hikeRating: this.props.rating,
+            hikeDescription: this.props.description,
+            id: this.props.id,
+            reviewIds: this.props.reviewIds,
+            photoPaths: this.props.photoPaths,
+            type: this.props.type
+          })}
+          style={[
+            styles.item,
+            { backgroundColor: this.props.selected ? '#EEEEEE' : '#FFFFFF' }
+          ]}
+        >
+          <View style={styles.row}>
+            <Image
+              source = {{ uri: 'https://via.placeholder.com/150' }}
+              style={styles.image}>
+            </Image>
 
-          <View style={styles.column}>
-            <Text style={styles.nameText}>{this.props.name}</Text>
-            <Text>Rating: <Text style={styles.rating}>{this.props.rating}</Text></Text>
-            <Text style={styles.description}>Description: {this.props.description}</Text>
+            <View style={styles.column}>
+              <Text style={styles.nameText}>{this.props.name}</Text>
+              <Text>Rating: <Text style={styles.rating}>{this.props.rating}</Text></Text>
+              <Text style={styles.description}>Description: {this.props.description}</Text>
+            </View>
           </View>
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </Card>
     )
   }
 }
@@ -49,9 +58,7 @@ const styles = StyleSheet.create({
   item: {
     backgroundColor: '#BBBBBB',
     borderRadius: 5,
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16
+    marginVertical: 8
   },
   nameText: {
     fontSize: 20,
