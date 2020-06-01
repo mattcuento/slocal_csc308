@@ -13,15 +13,53 @@ import {
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
 import { Card } from 'react-native-elements'
+import axios from 'axios'
 
 class LoginView extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      user: '',
-      pass: ''
+      // user: null,
+      name: '',
+      password: '',
+      errors: {},
+      isAuthorized: false,
+      isLoading: false
     }
+    this.onPressLogin = this.onPressLogin.bind(this)
+  }
+
+  async onPressLogin () {
+    const { name, password } = this.state
+    const user = { name, password }
+    console.log(user)
+
+    const onSuccess = () => {
+      // Set JSON Web Token on success
+      this.setState({ isLoading: false, isAuthorized: true })
+      this.props.navigation.navigate('SearchStack')
+    }
+
+    const onFailure = error => {
+      console.log('here')
+      console.log(error)
+    }
+
+    // Show spinner when call is made
+    this.setState({ isLoading: true })
+    const urlLink = 'https://slo-explore-308.herokuapp.com/users/one/' + user.name
+    console.log('this is string')
+    console.log(urlLink)
+    await axios.get(urlLink)
+      .then(data => {
+        this.setState({
+          user: data
+        })
+        console.log(this.state.user.data)
+      })
+      .then(onSuccess)
+      .catch(onFailure)
   }
 
   render () {
@@ -38,21 +76,22 @@ class LoginView extends Component {
                   <View style={styles.textWrapper}>
                     <Text style={styles.credentialText}>{'Username:'}</Text>
                     <TextInput style={styles.credentialStyle}
-                      onChangeText={(user) => this.setState({ user })}
-                      value={this.state.user}
+                      onChangeText={(name) => this.setState({ name })}
+                      value={this.state.name}
                     />
                   </View>
                   <View style={styles.textWrapper}>
                     <Text style={styles.credentialText}>{'Password:'}</Text>
                     <TextInput secureTextEntry={true} style={styles.credentialStyle}
-                      onChangeText={(pass) => this.setState({ pass })}
-                      value={this.state.pass}
+                      onChangeText={(password) => this.setState({ password })}
+                      value={this.state.password}
                     />
                   </View></Card>
               </ScrollView>
               <View style={styles.buttonWrapper}>
                 <TouchableHighlight style={styles.buttonStyle}
-                  onPress={() => this.props.navigation.navigate('SearchStack')}>
+                  onPress={this.onPressLogin}>
+                  {/* onPress={() => this.props.navigation.navigate('SearchStack')}> */}
                   <Icon
                     name="angle-right"
                     color="white"
