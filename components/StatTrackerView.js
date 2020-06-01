@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import MapView from 'react-native-maps'
+import MapView, { Marker, Geojson } from 'react-native-maps'
 import {
   ScrollView,
   StyleSheet,
@@ -9,6 +9,7 @@ import {
 import { withNavigation } from 'react-navigation'
 import { Divider, Icon, Card, registerCustomIconType } from 'react-native-elements'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
+import { pathMarkers, pathInfo } from '../constants/MapMarkers.js'
 registerCustomIconType('font-awesome-5', FontAwesome5)
 
 class StatTrackerView extends Component {
@@ -22,8 +23,21 @@ class StatTrackerView extends Component {
               longitude: -120.65962,
               latitudeDelta: 0.0922,
               longitudeDelta: 0.0421
-            }}
-          />
+            }}>
+            {pathMarkers.map(marker => (
+              <Marker
+                key={marker.id}
+                coordinate={marker.coordinate}
+                title={marker.title}
+              />
+            ))}
+            <Geojson
+              geojson={pathInfo}
+              strokeColor="#E76355"
+              fillColor="#E76355"
+              strokeWidth={2}
+            />
+          </MapView>
         </View>
         <View style={styles.divView}>
           <Divider style={styles.divStyle}/>

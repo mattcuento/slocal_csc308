@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import MapView from 'react-native-maps'
+import MapView, { Marker } from 'react-native-maps'
 import {
   ScrollView,
   StyleSheet,
   Dimensions
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
+import { markerInfo } from '../constants/MapMarkers.js'
 
 class HikeMapView extends Component {
   render () {
@@ -17,8 +18,15 @@ class HikeMapView extends Component {
             longitude: -120.65962,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421
-          }}
-        />
+          }}>
+          {markerInfo.map(marker => (
+            <Marker
+              key={marker.id}
+              coordinate={marker.coordinate}
+              title={marker.title}
+            />
+          ))}
+        </MapView>
       </ScrollView>
     )
   }
