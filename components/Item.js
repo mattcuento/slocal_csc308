@@ -10,6 +10,9 @@ import { useNavigation } from 'react-navigation-hooks'
 class Item extends Component {
   render () {
     const { navigation } = this.props
+    if (this.props.image.length > 0) {
+      console.log(this.props.image)
+    }
 
     return (
       <TouchableOpacity
@@ -21,7 +24,8 @@ class Item extends Component {
       >
         <View style={styles.row}>
           <Image
-            source = {{ uri: 'https://via.placeholder.com/150' }}
+            // source = {{ uri: 'https://via.placeholder.com/150' }}
+            source = {{ uri: this.props.image[0] }}
             style={styles.image}>
           </Image>
 
