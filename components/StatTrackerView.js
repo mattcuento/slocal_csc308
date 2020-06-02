@@ -14,6 +14,7 @@ registerCustomIconType('font-awesome-5', FontAwesome5)
 
 class StatTrackerView extends Component {
   render () {
+    const { navigation } = this.props
     return (
       <ScrollView style={styles.container}>
         <View style={styles.mapView}>
@@ -86,6 +87,7 @@ class StatTrackerView extends Component {
             <View style={styles.buttonStyle}>
               <Button
                 title='Start'
+                onPress={() => navigation.navigate('AddReview')}
               />
             </View>
             <View style={styles.buttonStyle}>
