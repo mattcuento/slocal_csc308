@@ -21,23 +21,22 @@ class AddReviewView extends Component {
     super(props)
     this.state = {
       cardTitle: 'Add Review for ',
-      starCount: 0,
-      comment: ''
+      rating: 0,
+      description: '',
+      hikeName: this.props.navigation.getParam('hikeName', 'missing hike name')
     }
     this.onPressSubmit = this.onPressSubmit.bind(this)
   }
 
   async onPressSubmit () {
     const { navigation } = this.props
-    const { starCount, comment } = this.state
-    const { hikeName } = navigation.getParam('hikeName', 'missing hike name')
-    const url = 'https://slo-explore-308.herokuapp.com/' + navigation.getParam('type', 0) + '/review/'
+    const { rating, description, hikeName } = this.state
+    const url = 'https://slo-explore-308.herokuapp.com/list/' + navigation.getParam('type', 0).toLowerCase() + '/review/' + hikeName
     console.log(url)
-    const newReview = { starCount, comment }
+    const newReview = { rating, description }
     console.log(newReview)
 
     const onSuccess = () => {
-      // Set JSON Web Token on success
       this.props.navigation.goBack()
     }
 
@@ -46,10 +45,10 @@ class AddReviewView extends Component {
       console.log(error)
     }
 
-    await axios.post(url.concat(hikeName),
+    await axios.post(url,
       {
-        description: comment,
-        rating: starCount
+        description: description,
+        rating: rating
       })
       .then(onSuccess)
       .catch(onFailure)
@@ -57,7 +56,7 @@ class AddReviewView extends Component {
 
   onStarRatingPress (rating) {
     this.setState({
-      starCount: rating
+      rating: rating
     })
   }
 
@@ -71,7 +70,7 @@ class AddReviewView extends Component {
               <Text style={styles.ratingText}>Rating: </Text>
               <StarRating
                 starSize={26}
-                rating={this.state.starCount}
+                rating={this.state.rating}
                 selectedStar={(rating) => this.onStarRatingPress(rating)}
                 fullStarColor='#4EF3AB'
               />
@@ -80,7 +79,7 @@ class AddReviewView extends Component {
               <Text style={styles.ratingText}>Comment: </Text>
               <Input
                 placeholder='Enter comments here...'
-                onChangeText={newComment => this.setState({ comment: newComment })}
+                onChangeText={newDescription => this.setState({ description: newDescription })}
               />
             </View>
           </Card>

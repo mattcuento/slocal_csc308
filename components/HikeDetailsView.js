@@ -126,6 +126,19 @@ class HikeDetailsView extends Component {
               ></SliderBox>
             </View>
           </Card>
+          <View style={styles.divView}>
+            <Divider style={styles.divStyle}/>
+          </View>
+          <Card>
+            <View style={styles.buttonContainer}>
+              <Button title='Add Review' onPress={ () => navigation.navigate('AddReview', {
+                hikeName: navigation.getParam('hikeName', 'missing hike name'),
+                type: navigation.getParam('type', 'type missing')
+              })}>
+              </Button>
+              <Button title='Add Photo' onPress={ () => navigation.navigate('AddPhoto')}></Button>
+            </View>
+          </Card>
           <View style={{ marginTop: 40 }}>
           </View>
         </View>
@@ -201,7 +214,8 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    height: 100
   }
 })
 
