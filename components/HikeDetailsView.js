@@ -17,7 +17,6 @@ import { withNavigation } from 'react-navigation'
 import { Divider, Card, registerCustomIconType } from 'react-native-elements'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import axios from 'axios'
-import { Item } from 'native-base'
 registerCustomIconType('font-awesome-5', FontAwesome5)
 
 class HikeDetailsView extends Component {
