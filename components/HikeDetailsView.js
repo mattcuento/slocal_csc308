@@ -183,7 +183,7 @@ class HikeDetailsView extends Component {
             </View>
           </Card>
           <View style={{ marginTop: 40 }}></View>
-          </View>
+        </View>
       </ScrollView>
     )
   }
