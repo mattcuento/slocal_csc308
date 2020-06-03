@@ -56,7 +56,15 @@ class RegisterView extends Component {
         name: name,
         password: password,
         password2: password2
-      })
+      }).then(() => {
+      if (email === '' || name === '' || password === '' || password2 === '') {
+        throw new Error('Fill out all fields')
+      } else if (password.length < 6) {
+        throw new Error('Password must be longer than 6 characters')
+      } else if (password !== password2) {
+        throw new Error('Passwords do not match')
+      }
+    })
       .then(onSuccess)
       .catch(onFailure)
   }
