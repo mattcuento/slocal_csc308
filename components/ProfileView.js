@@ -14,10 +14,10 @@ export class ProfileView extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      name: 'N/A',
-      hikes: 'n/a',
-      joinDate: 'Unknown',
-      bio: 'Unknown'
+      name: 'Testing',
+      hikes: '23',
+      joinDate: 'May 10 2020',
+      bio: 'Just a software tester who likes to hike!'
     }
   }
 

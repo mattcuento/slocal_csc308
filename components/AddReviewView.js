@@ -32,9 +32,7 @@ class AddReviewView extends Component {
     const { navigation } = this.props
     const { rating, description, hikeName } = this.state
     const url = 'https://slo-explore-308.herokuapp.com/list/' + navigation.getParam('type', 0).toLowerCase() + '/review/' + hikeName
-    console.log(url)
     const newReview = { rating, description }
-    console.log(newReview)
 
     const onSuccess = () => {
       this.props.navigation.goBack()

@@ -22,15 +22,14 @@ class FavoritesView extends Component {
   }
 
   async getHikes () {
-    await axios.get('https://slo-explore-308.herokuapp.com/')
+    await axios.get('https://slo-explore-308.herokuapp.com/list/location/all/detail')
       .then(res => res.data)
       .then(data => {
         this.setState({
           selected: null,
           isLoading: false,
-          hikes: data
+          hikes: data.splice(0, Math.ceil(data.length / 2))
         })
-        console.log(data)
       })
   }
 
@@ -49,10 +48,13 @@ class FavoritesView extends Component {
           data={this.state.hikes}
           renderItem={({ item }) => (
             <Item
-              image = {item.image}
+              id={item._id}
               name={item.name}
-              rate={item.rating}
-              details = {item.description}
+              rating ={item.rating}
+              description = {item.description}
+              type = {item.type}
+              reviewIds={item._reviews}
+              photoPaths={item._photos}
               // selected={!!this.state.selected.get(item.name)}
               // onSelect={onSelect}
             />

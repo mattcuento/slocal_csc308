@@ -34,7 +34,6 @@ class RegisterView extends Component {
   async onPressLogin () {
     const { email, name, password, password2 } = this.state
     const newUser = { email, name, password, password2 }
-    console.log(newUser)
 
     const onSuccess = () => {
       // Set JSON Web Token on success
@@ -43,7 +42,6 @@ class RegisterView extends Component {
     }
 
     const onFailure = error => {
-      console.log('here')
       console.log(error)
     }
 

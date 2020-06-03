@@ -1,57 +1,16 @@
 import React, { Component } from 'react'
+import Item from './Item'
 import axios from 'axios'
 import {
   SafeAreaView,
-  TouchableOpacity,
   FlatList,
   StyleSheet,
-  Text, Image, View, Button
+  Button
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
 
 import Constants from 'expo-constants'
 // import { useNavigation } from '@react-navigation/native';
-import { useNavigation } from 'react-navigation-hooks'
-
-function Item ({ image, name, time, selected, onSelect, ...props }) {
-  const { navigate } = useNavigation()
-
-  return (
-    <TouchableOpacity
-
-      onPress={() => navigate('Hike')}
-
-      style={[
-        styles.item,
-        { backgroundColor: selected ? '#bdb76b' : '#f0e68c' }
-      ]}
-    >
-      <View style= {{
-        flex: 1,
-        flexDirection: 'row'
-
-      }}>
-        <Image
-          source = {{ uri: image }}
-          style = {{ width: 200, height: 200, marginHorizontal: 10 }}>
-        </Image>
-
-        <View style = {{
-          flex: 1,
-          flexDirection: 'column'
-        }}>
-
-          <Text style={styles.name}>{name}</Text>
-          <Text style={styles.name}>Completed: {time}</Text>
-
-        </View>
-
-      </View>
-
-    </TouchableOpacity>
-  )
-}
-
 class HistoryView extends Component {
   constructor (props) {
     super(props)
@@ -66,15 +25,14 @@ class HistoryView extends Component {
   }
 
   async getHikes () {
-    await axios.get('https://slo-explore-308.herokuapp.com/')
+    await axios.get('https://slo-explore-308.herokuapp.com/list/location/all/detail')
       .then(res => res.data)
       .then(data => {
         this.setState({
           selected: null,
           isLoading: false,
-          hikes: data
+          hikes: data.splice(0, 5)
         })
-        console.log(data)
       })
   }
 
@@ -93,10 +51,13 @@ class HistoryView extends Component {
           data={this.state.hikes}
           renderItem={({ item }) => (
             <Item
-              image = {item.image}
+              id={item._id}
               name={item.name}
-              time= {item.time}
-              navigation={this.props}
+              rating ={item.rating}
+              description = {item.description}
+              type = {item.type}
+              reviewIds={item._reviews}
+              photoPaths={item._photos}
               // selected={!!this.state.selected.get(item.name)}
               // onSelect={onSelect}
             />

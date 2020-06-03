@@ -10,9 +10,6 @@ import { Card } from 'react-native-elements'
 class Item extends Component {
   render () {
     const { navigation } = this.props
-    // if (this.props.image.length > 0) {
-    //   console.log(this.props.image)
-    // }
 
     return (
       <Card>

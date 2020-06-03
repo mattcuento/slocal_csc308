@@ -39,7 +39,6 @@ class AddPhotoView extends Component {
         this.setState({
           selectedImage: photo.uri
         })
-        console.log(photo.uri)
       }
     )
   }

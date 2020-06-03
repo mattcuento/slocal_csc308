@@ -33,7 +33,6 @@ class LoginView extends Component {
   async onPressLogin () {
     const { name, password } = this.state
     const user = { name, password }
-    console.log(user)
 
     const onSuccess = () => {
       // Set JSON Web Token on success
@@ -42,21 +41,17 @@ class LoginView extends Component {
     }
 
     const onFailure = error => {
-      console.log('here')
       console.log(error)
     }
 
     // Show spinner when call is made
     this.setState({ isLoading: true })
     const urlLink = 'https://slo-explore-308.herokuapp.com/users/one/' + user.name
-    console.log('this is string')
-    console.log(urlLink)
     await axios.get(urlLink)
       .then(data => {
         this.setState({
           user: data
         })
-        console.log(this.state.user.data)
       }).then(() => {
         if (this.state.user.data == null) {
           throw new Error('User does not exist')

@@ -87,8 +87,6 @@ class ListView extends Component {
                 type = {item.type}
                 reviewIds={item._reviews}
                 photoPaths={item._photos}
-              // selected={!!this.state.selected.get(item.name)}
-              // onSelect={onSelect}
               />
             )}
             keyExtractor={item => item._id}

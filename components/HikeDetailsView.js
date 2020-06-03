@@ -56,7 +56,6 @@ class HikeDetailsView extends Component {
     const { navigation } = this.props
     let photos = ['https://via.placeholder.com/200']
     const url = 'https://slo-explore-308.herokuapp.com/list/location/' + navigation.getParam('id', 0) + '/' + navigation.getParam('type', 0)
-    console.log(url)
     await axios.get(url)
       .then(res => res.data)
       .then(data => {
