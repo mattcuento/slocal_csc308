@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
 import StarRating from 'react-native-star-rating'
+import ShowMore from 'react-native-show-more-button'
 import { SliderBox } from 'react-native-image-slider-box'
+import Review from '../components/Review'
 import {
   ScrollView,
   StyleSheet,
   Image,
   Button,
   Text,
-  View
+  View,
+  FlatList
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
 import { Divider, Card, registerCustomIconType } from 'react-native-elements'
@@ -27,6 +30,7 @@ class HikeDetailsView extends Component {
 
     this.getHikeDetails = this.getHikeDetails.bind(this)
     this.getReviewsFromIds = this.getReviewsFromIds.bind(this)
+    this.showMoreConditional = this.showMoreConditional.bind(this)
   }
 
   componentDidMount () {
@@ -70,8 +74,47 @@ class HikeDetailsView extends Component {
       .catch(err => console.log(err))
   }
 
+  showMoreConditional () {
+    if (this.state.reviews.length > 2) {
+      return (
+        <ShowMore height={130}>
+          <FlatList
+            data={this.state.reviews}
+            renderItem={({ item }) => (
+              <Review
+                rating ={item.rating}
+                description = {item.description}
+                user = {item._user}
+              />
+            )}
+            keyExtractor={item => item._id}
+          />
+        </ShowMore>
+      )
+    } else if (this.state.reviews.length >= 1) {
+      return (
+        <FlatList
+          data={this.state.reviews}
+          renderItem={({ item }) => (
+            <Review
+              rating ={item.rating}
+              description = {item.description}
+              user = {item._user}
+            />
+          )}
+          keyExtractor={item => item._id}
+        />
+      )
+    } else {
+      return (
+        <Text>No reviews submitted.</Text>
+      )
+    }
+  }
+
   render () {
     const { navigation } = this.props
+    const reviews = this.showMoreConditional()
     return (
       <ScrollView style={styles.container}>
         <View style={styles.container}>
@@ -113,12 +156,12 @@ class HikeDetailsView extends Component {
           </View>
           <Card title='User Reviews'>
             <ScrollView>
-
+              {reviews}
             </ScrollView>
-            <View style={styles.reviewsView}>
-              <Text>Reviews</Text>
-            </View>
           </Card>
+          <View style={styles.divView}>
+            <Divider style={styles.divStyle}/>
+          </View>
           <Card title='Photos'>
             <View style={styles.imageContainer}>
               <SliderBox images={this.state.images}
@@ -126,8 +169,15 @@ class HikeDetailsView extends Component {
               ></SliderBox>
             </View>
           </Card>
-          <View style={{ marginTop: 40 }}>
+          <View style={styles.divView}>
+            <Divider style={styles.divStyle}/>
           </View>
+          <Card>
+            <View style={styles.buttonContainer}>
+              <Button title='Add Review' onPress={ () => navigation.navigate('AddReview')}></Button>
+              <Button title='Add Photo' onPress={ () => navigation.navigate('AddPhoto')}></Button>
+            </View>
+          </Card>
         </View>
       </ScrollView>
     )
@@ -136,11 +186,18 @@ class HikeDetailsView extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 10,
+    marginVertical: 10,
     flex: 1,
     backgroundColor: '#d6e9d7',
     width: '100%',
     height: '150%'
+  },
+  buttonContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 10
   },
   imageView: {
     flex: 1,
@@ -201,7 +258,8 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    height: 200
   }
 })
 
