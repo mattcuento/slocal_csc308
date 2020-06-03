@@ -12,27 +12,83 @@ import { withNavigation } from 'react-navigation'
 import { Divider, Card, registerCustomIconType } from 'react-native-elements'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import Carousel from 'react-native-snap-carousel'
+import * as ImagePicker from 'expo-image-picker'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 registerCustomIconType('font-awesome-5', FontAwesome5)
 
 class AddPhotoView extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      selectedImage: 'https://via.placeholder.com/150'
     }
+
+    this.permissions = this.permissions.bind(this)
+  }
+
+  async permissions () {
+    const permissionResult = await ImagePicker.requestCameraRollPermissionsAsync()
+
+    if (permissionResult.granted === false) {
+      console.alert('Permission to access camera roll is required!')
+      return
+    }
+
+    const pickerResult = await ImagePicker.launchImageLibraryAsync().then(
+      photo => {
+        this.setState({
+          selectedImage: photo.uri
+        })
+        console.log(photo.uri)
+      }
+    )
   }
 
   render () {
     const { navigation } = this.props
     return (
       <ScrollView style={styles.container}>
+        <View style={styles.view}>
+          <TouchableOpacity
+            onPress={this.permissions}
+            style={styles.photoButton}
+          >
+            <Text style={styles.photoText}>
+              Choose a Photo
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View>
+          <Image
+            source={{ uri: this.state.selectedImage.localUri }}
+            style={styles.thumbnail}
+          ></Image>
+        </View>
       </ScrollView>
     )
   }
 }
 
 const styles = StyleSheet.create({
+  thumbnail: {
+    width: 300,
+    height: 300,
+    resizeMode: 'contain'
+  },
+  view: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: '100%'
+  },
+  photoButton: {
+
+  },
+  photoText: {
+
+  },
   container: {
-    marginTop: 10,
+    marginVertical: 150,
     flex: 1,
     backgroundColor: '#d6e9d7',
     width: '100%',

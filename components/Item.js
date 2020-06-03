@@ -33,14 +33,14 @@ class Item extends Component {
         >
           <View style={styles.row}>
             <Image
-              source = {{ uri: 'https://via.placeholder.com/150' }}
+              source = {{ uri: this.props.photoPaths[0] }}
               style={styles.image}>
             </Image>
 
             <View style={styles.column}>
               <Text style={styles.nameText}>{this.props.name}</Text>
               <Text>Rating: <Text style={styles.rating}>{this.props.rating}</Text></Text>
-              <Text style={styles.description}>Description: {this.props.description}</Text>
+              <Text style={styles.description}>Description: {this.props.description.substring(0, 190) + '...'}</Text>
             </View>
           </View>
         </TouchableOpacity>
