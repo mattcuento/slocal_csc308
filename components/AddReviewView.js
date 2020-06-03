@@ -13,6 +13,7 @@ import { withNavigation } from 'react-navigation'
 import { Divider, Button, Text, Input, Card, registerCustomIconType } from 'react-native-elements'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import Carousel from 'react-native-snap-carousel'
+import axios from 'axios'
 registerCustomIconType('font-awesome-5', FontAwesome5)
 
 class AddReviewView extends Component {
@@ -23,6 +24,35 @@ class AddReviewView extends Component {
       starCount: 0,
       comment: ''
     }
+    this.onPressSubmit = this.onPressSubmit.bind(this)
+  }
+
+  async onPressSubmit () {
+    const { navigation } = this.props
+    const { starCount, comment } = this.state
+    const { hikeName } = navigation.getParam('hikeName', 'missing hike name')
+    const url = 'https://slo-explore-308.herokuapp.com/' + navigation.getParam('type', 0) + '/review/'
+    console.log(url)
+    const newReview = { starCount, comment }
+    console.log(newReview)
+
+    const onSuccess = () => {
+      // Set JSON Web Token on success
+      this.props.navigation.goBack()
+    }
+
+    const onFailure = error => {
+      console.log('Failed to add review')
+      console.log(error)
+    }
+
+    await axios.post(url.concat(hikeName),
+      {
+        description: comment,
+        rating: starCount
+      })
+      .then(onSuccess)
+      .catch(onFailure)
   }
 
   onStarRatingPress (rating) {
@@ -58,6 +88,7 @@ class AddReviewView extends Component {
             <View style={styles.buttonView}>
               <Button
                 title='Submit Review'
+                onPress={this.onPressSubmit}
               />
             </View>
             <View style={styles.buttonView}>
