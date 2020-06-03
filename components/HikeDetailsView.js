@@ -264,11 +264,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-<<<<<<< HEAD
-    height: 100
-=======
     height: 200
->>>>>>> fb26301276556ecac154347430629209d30dc034
   }
 })
 
