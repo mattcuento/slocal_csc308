@@ -174,10 +174,15 @@ class HikeDetailsView extends Component {
           </View>
           <Card>
             <View style={styles.buttonContainer}>
-              <Button title='Add Review' onPress={ () => navigation.navigate('AddReview')}></Button>
+              <Button title='Add Review' onPress={ () => navigation.navigate('AddReview', {
+                hikeName: navigation.getParam('hikeName', 'missing hike name'),
+                type: navigation.getParam('type', 'type missing')
+              })}>
+              </Button>
               <Button title='Add Photo' onPress={ () => navigation.navigate('AddPhoto')}></Button>
             </View>
           </Card>
+          <View style={{ marginTop: 40 }}></View>
         </View>
       </ScrollView>
     )

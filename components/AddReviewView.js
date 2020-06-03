@@ -13,6 +13,7 @@ import { withNavigation } from 'react-navigation'
 import { Divider, Button, Text, Input, Card, registerCustomIconType } from 'react-native-elements'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import Carousel from 'react-native-snap-carousel'
+import axios from 'axios'
 registerCustomIconType('font-awesome-5', FontAwesome5)
 
 class AddReviewView extends Component {
@@ -20,14 +21,42 @@ class AddReviewView extends Component {
     super(props)
     this.state = {
       cardTitle: 'Add Review for ',
-      starCount: 0,
-      comment: ''
+      rating: 0,
+      description: '',
+      hikeName: this.props.navigation.getParam('hikeName', 'missing hike name')
     }
+    this.onPressSubmit = this.onPressSubmit.bind(this)
+  }
+
+  async onPressSubmit () {
+    const { navigation } = this.props
+    const { rating, description, hikeName } = this.state
+    const url = 'https://slo-explore-308.herokuapp.com/list/' + navigation.getParam('type', 0).toLowerCase() + '/review/' + hikeName
+    console.log(url)
+    const newReview = { rating, description }
+    console.log(newReview)
+
+    const onSuccess = () => {
+      this.props.navigation.goBack()
+    }
+
+    const onFailure = error => {
+      console.log('Failed to add review')
+      console.log(error)
+    }
+
+    await axios.post(url,
+      {
+        description: description,
+        rating: rating
+      })
+      .then(onSuccess)
+      .catch(onFailure)
   }
 
   onStarRatingPress (rating) {
     this.setState({
-      starCount: rating
+      rating: rating
     })
   }
 
@@ -41,7 +70,7 @@ class AddReviewView extends Component {
               <Text style={styles.ratingText}>Rating: </Text>
               <StarRating
                 starSize={26}
-                rating={this.state.starCount}
+                rating={this.state.rating}
                 selectedStar={(rating) => this.onStarRatingPress(rating)}
                 fullStarColor='#4EF3AB'
               />
@@ -50,7 +79,7 @@ class AddReviewView extends Component {
               <Text style={styles.ratingText}>Comment: </Text>
               <Input
                 placeholder='Enter comments here...'
-                onChangeText={newComment => this.setState({ comment: newComment })}
+                onChangeText={newDescription => this.setState({ description: newDescription })}
               />
             </View>
           </Card>
@@ -58,6 +87,7 @@ class AddReviewView extends Component {
             <View style={styles.buttonView}>
               <Button
                 title='Submit Review'
+                onPress={this.onPressSubmit}
               />
             </View>
             <View style={styles.buttonView}>
