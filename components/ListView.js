@@ -81,7 +81,6 @@ class ListView extends Component {
             renderItem={({ item }) => (
               <Item
                 id={item._id}
-                image = {item.image}
                 name={item.name}
                 rating ={item.rating}
                 description = {item.description}
