@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import StarRating from 'react-native-star-rating'
+import ShowMore from 'react-native-show-more-button'
 import { SliderBox } from 'react-native-image-slider-box'
 import {
   ScrollView,
