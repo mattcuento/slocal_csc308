@@ -57,6 +57,10 @@ class LoginView extends Component {
           user: data
         })
         console.log(this.state.user.data)
+      }).then(() => {
+        if (this.state.user.data == null) {
+          throw new Error('User does not exist')
+        }
       })
       .then(onSuccess)
       .catch(onFailure)
