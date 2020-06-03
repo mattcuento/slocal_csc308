@@ -13,7 +13,6 @@ import { withNavigation } from 'react-navigation'
 import { Divider, Button, Text, Input, Card, registerCustomIconType } from 'react-native-elements'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import Carousel from 'react-native-snap-carousel'
-import { Form, Input } from 'native-base'
 registerCustomIconType('font-awesome-5', FontAwesome5)
 
 class AddReviewView extends Component {

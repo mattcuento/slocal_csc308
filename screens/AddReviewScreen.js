@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {
   ScrollView,
-  Text,
   StyleSheet
 } from 'react-native'
 import AddReviewView from '../components/AddReviewView'
