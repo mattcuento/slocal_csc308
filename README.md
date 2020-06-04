@@ -62,12 +62,15 @@ https://docs.google.com/document/d/10YGkEBrYtVoi8otoQB1qvO0E4qMtMo_NWBCawcyytlw/
 Here are the results of running the acceptance tests:
 
 Landing Tests Results
+
 ![Landing Tests](/Landing_Acceptance_Tests.png)
 
 Authentication Tests Results
+
 ![Authentication Tests](/Authentication_Acceptance_Tests.png)
 
 Navigation Tests Results
+
 ![Navigation Tests](/Navigation_Acceptance_Tests.png)
 
 
