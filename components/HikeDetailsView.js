@@ -117,80 +117,79 @@ class HikeDetailsView extends Component {
     const reviews = this.showMoreConditional()
     return (
       <ScrollView style={styles.container}>
-        <View style={styles.button}>
-          <Button title="Go Back" onPress={() => navigation.goBack()}/>
-        </View>
-        <View style={styles.imageView}>
-          <Image
-            source = {{ uri: this.state.images[0] }}
-            style={styles.imageStyle}>
-          </Image>
-        </View>
-        <View style={styles.divView}>
-          <Divider style={styles.divStyle}/>
-        </View>
-        <View>
-          <Card title={navigation.getParam('hikeName', 'Missing Hike Name')}>
-            <View style={styles.infoView}>
-              <Text style={styles.infoHeader}>Rating: </Text>
-              <StarRating
-                starSize={26}
-                rating={navigation.getParam('hikeRating', 0)}
-                fullStarColor='#4EF3AB'
-              />
-            </View>
-            <View style={styles.descView}>
-              <Text style={styles.infoHeader}>Description: </Text>
-              <Text style={styles.descText}>{navigation.getParam('hikeDescription', 'No description')}</Text>
-            </View>
-            <View style={styles.gearView}>
-              <Text style={styles.infoHeader}>Recommended Gear: </Text>
-              <Text style={styles.gearText}>{navigation.getParam('hikeGear', 'None')}</Text>
+        <View style={styles.container}>
+          <Button
+            onPress={() => this.props.navigation.navigate('SearchStack')}
+            title='Back'
+          />
+          <View style={styles.imageView}>
+            <Image
+              source = {{ uri: this.state.images[0] }}
+              style={styles.imageStyle}>
+            </Image>
+          </View>
+          <View style={styles.divView}>
+            <Divider style={styles.divStyle}/>
+          </View>
+          <View>
+            <Card title={navigation.getParam('hikeName', 'Missing Hike Name')}>
+              <View style={styles.infoView}>
+                <Text style={styles.infoHeader}>Rating: </Text>
+                <StarRating
+                  starSize={26}
+                  rating={navigation.getParam('hikeRating', 0)}
+                  fullStarColor='#4EF3AB'
+                />
+              </View>
+              <View style={styles.descView}>
+                <Text style={styles.infoHeader}>Description: </Text>
+                <Text style={styles.descText}>{navigation.getParam('hikeDescription', 'No description')}</Text>
+              </View>
+              <View style={styles.gearView}>
+                <Text style={styles.infoHeader}>Recommended Gear: </Text>
+                <Text style={styles.gearText}>{navigation.getParam('hikeGear', 'None')}</Text>
+              </View>
+            </Card>
+          </View>
+          <View style={styles.divView}>
+            <Divider style={styles.divStyle}/>
+          </View>
+          <Card title='User Reviews'>
+            <ScrollView>
+              {reviews}
+            </ScrollView>
+          </Card>
+          <View style={styles.divView}>
+            <Divider style={styles.divStyle}/>
+          </View>
+          <Card title='Photos'>
+            <View style={styles.imageContainer}>
+              <SliderBox images={this.state.images}
+                parentWidth={340}
+              ></SliderBox>
             </View>
           </Card>
-        </View>
-        <View style={styles.divView}>
-          <Divider style={styles.divStyle}/>
-        </View>
-        <Card title='User Reviews'>
-          <ScrollView>
-            {reviews}
-          </ScrollView>
-        </Card>
-        <View style={styles.divView}>
-          <Divider style={styles.divStyle}/>
-        </View>
-        <Card title='Photos'>
-          <View style={styles.imageContainer}>
-            <SliderBox images={this.state.images}
-              parentWidth={340}
-            ></SliderBox>
+          <View style={styles.divView}>
+            <Divider style={styles.divStyle}/>
           </View>
-        </Card>
-        <View style={styles.divView}>
-          <Divider style={styles.divStyle}/>
+          <Card>
+            <View style={styles.buttonContainer}>
+              <Button title='Add Review' onPress={ () => navigation.navigate('AddReview', {
+                hikeName: navigation.getParam('hikeName', 'missing hike name'),
+                type: navigation.getParam('type', 'type missing')
+              })}>
+              </Button>
+              <Button title='Add Photo' onPress={ () => navigation.navigate('AddPhoto')}></Button>
+            </View>
+          </Card>
+          <View style={{ marginTop: 40 }}></View>
         </View>
-        <Card>
-          <View style={styles.buttonContainer}>
-            <Button title='Add Review' onPress={ () => navigation.navigate('AddReview', {
-              hikeName: navigation.getParam('hikeName', 'missing hike name'),
-              type: navigation.getParam('type', 'type missing')
-            })}>
-            </Button>
-            <Button title='Add Photo' onPress={ () => navigation.navigate('AddPhoto')}></Button>
-          </View>
-        </Card>
-        <View style={{ marginTop: 40 }}></View>
       </ScrollView>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  button: {
-    marginTop: 15,
-    alignItems: 'flex-start'
-  },
   container: {
     marginVertical: 10,
     flex: 1,
