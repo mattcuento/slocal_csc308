@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import MapView, { Marker, Geojson } from 'react-native-maps'
+{/*import MapView, { Marker, Geojson } from 'react-native-maps'*/}
 import {
   ScrollView,
   StyleSheet,
@@ -17,7 +17,7 @@ class StatTrackerView extends Component {
     return (
       <ScrollView style={styles.container}>
         <View style={styles.mapView}>
-          <MapView style={styles.mapStyle}
+          {/*<MapView style={styles.mapStyle}
             initialRegion={{
               latitude: 35.28275,
               longitude: -120.65962,
@@ -37,7 +37,7 @@ class StatTrackerView extends Component {
               fillColor="#E76355"
               strokeWidth={2}
             />
-          </MapView>
+          </MapView>*/}
         </View>
         <View style={styles.divView}>
           <Divider style={styles.divStyle}/>
