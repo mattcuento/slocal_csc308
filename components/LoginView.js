@@ -60,6 +60,8 @@ class LoginView extends Component {
       }).then(() => {
         if (this.state.user.data == null) {
           throw new Error('User does not exist')
+        } else if (name === '' || password === '') {
+          throw new Error('Fill out all fields')
         }
       })
       .then(onSuccess)
