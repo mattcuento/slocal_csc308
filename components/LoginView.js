@@ -12,15 +12,62 @@ import {
   KeyboardAvoidingView
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
+import { Card } from 'react-native-elements'
+import axios from 'axios'
 
 class LoginView extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      user: '',
-      pass: ''
+      // user: null,
+      name: '',
+      password: '',
+      errors: {},
+      isAuthorized: false,
+      isLoading: false
     }
+    this.onPressLogin = this.onPressLogin.bind(this)
+  }
+
+  async onPressLogin () {
+    const { name, password } = this.state
+    const user = { name, password }
+    console.log(user)
+
+    const onSuccess = () => {
+      // Set JSON Web Token on success
+      this.setState({ isLoading: false, isAuthorized: true })
+      this.props.navigation.navigate('Main', {
+                    username: this.state.user
+                  })
+    }
+
+    const onFailure = error => {
+      console.log('here')
+      console.log(error)
+    }
+
+    // Show spinner when call is made
+    this.setState({ isLoading: true })
+    const urlLink = 'https://slo-explore-308.herokuapp.com/users/one/' + user.name
+    console.log('this is string')
+    console.log(urlLink)
+    await axios.get(urlLink)
+      .then(data => {
+        this.setState({
+          user: data
+        })
+        console.log(this.state.user.data)
+      }).then(() => {
+        if (this.state.user.data == null) {
+          throw new Error('User does not exist')
+        } else if (name === '' || password === '') {
+          throw new Error('Fill out all fields')
+        }
+      })
+      .then(onSuccess)
+      .catch(onFailure)
   }
 
   render () {
@@ -32,27 +79,27 @@ class LoginView extends Component {
           <KeyboardAvoidingView style={styles.wrapper} behavior="padding">
             <View style={styles.scrollViewWrapper}>
               <ScrollView>
-                <Text style={styles.loginText}>SLO Explore Login</Text>
-                <View style={styles.textWrapper}>
-                  <Text style={styles.credentialText}>{'Username:'}</Text>
-                  <TextInput style={styles.credentialStyle}
-                    onChangeText={(user) => this.setState({ user })}
-                    value={this.state.user}
-                  />
-                </View>
-                <View style={styles.textWrapper}>
-                  <Text style={styles.credentialText}>{'Password:'}</Text>
-                  <TextInput secureTextEntry={true} style={styles.credentialStyle}
-                    onChangeText={(pass) => this.setState({ pass })}
-                    value={this.state.pass}
-                  />
-                </View>
+                <Card>
+                  <Text style={styles.loginText}>SLO Explore Login</Text>
+                  <View style={styles.textWrapper}>
+                    <Text style={styles.credentialText}>{'Username:'}</Text>
+                    <TextInput style={styles.credentialStyle}
+                      onChangeText={(name) => this.setState({ name })}
+                      value={this.state.name}
+                    />
+                  </View>
+                  <View style={styles.textWrapper}>
+                    <Text style={styles.credentialText}>{'Password:'}</Text>
+                    <TextInput secureTextEntry={true} style={styles.credentialStyle}
+                      onChangeText={(password) => this.setState({ password })}
+                      value={this.state.password}
+                    />
+                  </View></Card>
               </ScrollView>
               <View style={styles.buttonWrapper}>
                 <TouchableHighlight style={styles.buttonStyle}
-                  onPress={() => this.props.navigation.navigate('Main', {
-                    username: this.state.user
-                  })}>
+                  onPress={this.onPressLogin}>
+                  {/* onPress={() => this.props.navigation.navigate('SearchStack')}> */}
                   <Icon
                     name="angle-right"
                     color="white"
@@ -80,18 +127,18 @@ const styles = StyleSheet.create({
     paddingLeft: 30
   },
   scrollViewWrapper: {
-    marginTop: 40,
+    marginTop: '20%',
     flex: 1
   },
   loginText: {
     fontSize: 30,
-    color: 'white',
+    color: 'darkcyan',
     fontWeight: '400',
     marginBottom: 10,
     paddingLeft: 26,
     paddingRight: 30,
     paddingTop: 20,
-    textShadowColor: 'darkcyan',
+    textShadowColor: '#BBB',
     textShadowRadius: 6
   },
   credentialText: {

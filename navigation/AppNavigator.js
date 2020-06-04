@@ -9,6 +9,8 @@ import LoginScreen from '../screens/LoginScreen'
 import RegisterScreen from '../screens/RegisterScreen'
 import WelcomeScreen from '../screens/WelcomeScreen'
 import FavoritesScreen from '../screens/FavoritesScreen'
+import AddReviewScreen from '../screens/AddReviewScreen'
+import AddPhotoScreen from '../screens/AddPhotoScreen'
 
 export default createAppContainer(
   createStackNavigator({
@@ -16,6 +18,8 @@ export default createAppContainer(
     // Read more at https://reactnavigation.org/docs/en/auth-flow.html
 
     Hike: HikeDetails,
+    AddPhoto: AddPhotoScreen,
+    AddReview: AddReviewScreen,
     History: HistoryScreen,
     Settings: SettingsScreen,
     Main: MainTabNavigator,

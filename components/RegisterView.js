@@ -12,6 +12,7 @@ import {
   KeyboardAvoidingView
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
+import { Card } from 'react-native-elements'
 import axios from 'axios'
 
 class RegisterView extends Component {
@@ -57,7 +58,15 @@ class RegisterView extends Component {
         name: name,
         password: password,
         password2: password2
-      })
+      }).then(() => {
+      if (email === '' || name === '' || password === '' || password2 === '') {
+        throw new Error('Fill out all fields')
+      } else if (password.length < 6) {
+        throw new Error('Password must be longer than 6 characters')
+      } else if (password !== password2) {
+        throw new Error('Passwords do not match')
+      }
+    })
       .then(onSuccess)
       .catch(onFailure)
   }
@@ -71,35 +80,36 @@ class RegisterView extends Component {
           <KeyboardAvoidingView style={styles.wrapper} behavior="padding">
             <View style={styles.scrollViewWrapper}>
               <ScrollView>
-                <Text style={styles.loginText}>SLO Explore Registration</Text>
-                <View style={styles.textWrapper}>
-                  <Text style={styles.credentialText}>{'Email:'}</Text>
-                  <TextInput style={styles.credentialStyle}
-                    onChangeText={(email) => this.setState({ email })}
-                    value={this.state.email}
-                  />
-                </View>
-                <View style={styles.textWrapper}>
-                  <Text style={styles.credentialText}>{'Username:'}</Text>
-                  <TextInput style={styles.credentialStyle}
-                    onChangeText={(name) => this.setState({ name })}
-                    value={this.state.name}
-                  />
-                </View>
-                <View style={styles.textWrapper}>
-                  <Text style={styles.credentialText}>{'Password:'}</Text>
-                  <TextInput secureTextEntry={true} style={styles.credentialStyle}
-                    onChangeText={(password) => this.setState({ password })}
-                    value={this.state.password}
-                  />
-                </View>
-                <View style={styles.textWrapper}>
-                  <Text style={styles.credentialText}>{'Confirm Password:'}</Text>
-                  <TextInput secureTextEntry={true} style={styles.credentialStyle}
-                    onChangeText={(password2) => this.setState({ password2 })}
-                    value={this.state.password2}
-                  />
-                </View>
+                <Card>
+                  <Text style={styles.loginText}>SLO Explore Registration</Text>
+                  <View style={styles.textWrapper}>
+                    <Text style={styles.credentialText}>{'Email:'}</Text>
+                    <TextInput style={styles.credentialStyle}
+                      onChangeText={(email) => this.setState({ email })}
+                      value={this.state.email}
+                    />
+                  </View>
+                  <View style={styles.textWrapper}>
+                    <Text style={styles.credentialText}>{'Username:'}</Text>
+                    <TextInput style={styles.credentialStyle}
+                      onChangeText={(name) => this.setState({ name })}
+                      value={this.state.name}
+                    />
+                  </View>
+                  <View style={styles.textWrapper}>
+                    <Text style={styles.credentialText}>{'Password:'}</Text>
+                    <TextInput secureTextEntry={true} style={styles.credentialStyle}
+                      onChangeText={(password) => this.setState({ password })}
+                      value={this.state.password}
+                    />
+                  </View>
+                  <View style={styles.textWrapper}>
+                    <Text style={styles.credentialText}>{'Confirm Password:'}</Text>
+                    <TextInput secureTextEntry={true} style={styles.credentialStyle}
+                      onChangeText={(password2) => this.setState({ password2 })}
+                      value={this.state.password2}
+                    />
+                  </View></Card>
               </ScrollView>
               <View style={styles.buttonWrapper}>
                 <TouchableHighlight style={styles.buttonStyle}
@@ -132,18 +142,18 @@ const styles = StyleSheet.create({
     paddingLeft: 30
   },
   scrollViewWrapper: {
-    marginTop: 40,
+    marginTop: '20%',
     flex: 1
   },
   loginText: {
     fontSize: 30,
-    color: 'white',
+    color: 'darkcyan',
     fontWeight: '400',
     marginBottom: 10,
     paddingLeft: 26,
     paddingRight: 30,
     paddingTop: 20,
-    textShadowColor: 'darkcyan',
+    textShadowColor: '#BBB',
     textShadowRadius: 6
   },
   credentialText: {

@@ -53,7 +53,6 @@ class ListView extends Component {
   }
 
   async getHikes () {
-    console.log('here')
     await axios.get('https://slo-explore-308.herokuapp.com/list/location/all/detail')
       .then(res => res.data)
       .then(data => {
@@ -81,10 +80,13 @@ class ListView extends Component {
             data={this.state.hikes}
             renderItem={({ item }) => (
               <Item
-                image = {item.image}
+                id={item._id}
                 name={item.name}
                 rating ={item.rating}
                 description = {item.description}
+                type = {item.type}
+                reviewIds={item._reviews}
+                photoPaths={item._photos}
               // selected={!!this.state.selected.get(item.name)}
               // onSelect={onSelect}
               />
