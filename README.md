@@ -22,14 +22,23 @@ ALTERNATIVE
 
 # TESTING
 
-# Front End
+## Front End
 
 TBD...
 
-# Back End
+## Back End
 
 1) Clone the back end repository here https://github.com/mattcuento/slo_explore_backend
 2) Ensure you have Node Package Manager
 3) cd into the outermost directory
 4) Enter the command "npm run test" and mocha tests will run.
 
+# Static Code Analyis
+
+## Front End
+
+![Front Static Report](/frontend.png)
+
+## Back End
+
+![Back Static Report](/backend.png)
