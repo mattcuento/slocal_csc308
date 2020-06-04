@@ -35,8 +35,23 @@ Since our application does no heavy calculations but relies heavily on connectio
 
 ## Acceptance Testing
 
-TBD...
-ADD LINKS TO TEST SPECS AND ACCEPTANCE TEST FOLDERS
+Checkout cypress-testing branch and run the following code in your terminal:
+
+npm run cypress:open
+     
+  The Cypress app will then open. Click on the test file in Cypress and allow the tests to run
+      
+          or 
+          
+npx cypress run
+      
+   The test results will then appear in your terminal
+     
+
+Below are the Gherkin Language of each scenario that we tested
+
+https://docs.google.com/document/d/10YGkEBrYtVoi8otoQB1qvO0E4qMtMo_NWBCawcyytlw/edit
+
 
 # Static Code Analyis
 
