@@ -22,16 +22,21 @@ ALTERNATIVE
 
 # TESTING
 
-## Front End
-
-TBD...
-
-## Back End
+## Unit/Integration
 
 1) Clone the back end repository here https://github.com/mattcuento/slo_explore_backend
 2) Ensure you have Node Package Manager
 3) cd into the outermost directory
 4) Enter the command "npm run test" and mocha tests will run.
+
+![Integration Tests](/controllers.png)
+
+Since our application does no heavy calculations but relies heavily on connections to the database, we created mainly integration tests with Mocha and used NYC for a report. You can see here that the HikeController file has 58% covered and listController at 77.5%. While some other files are lower than this, we justify it for a couple reasons. The main application logic lies within the listController primarily and Hike/Beach/Lookout secondarily. Hike/Beach/Lookout controllers all have the same functionality just copied over different types so it was only necessary to fully test one, which was hikes. Additionally we tested the UserController at 42%. This is because we did not want to 'test' the deletion and alteration of some users.
+
+## Acceptance Testing
+
+TBD...
+ADD LINKS TO TEST SPECS AND ACCEPTANCE TEST FOLDERS
 
 # Static Code Analyis
 
