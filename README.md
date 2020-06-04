@@ -1,4 +1,4 @@
-# slocal_csc308
+# SLO Explore
 CSC 308/309 Mobile Application project. SLO County hike, beach, and viewpoint guide.
 
 Link to Figma UI Prototype V2: https://www.figma.com/file/JJYmZaMw0HWyms2Dm2xp73/SLOcal?node-id=1%3A9
@@ -46,4 +46,4 @@ ADD LINKS TO TEST SPECS AND ACCEPTANCE TEST FOLDERS
 
 ## Back End
 
-![Back Static Report](/backend.png)
+![Back Static Report](/back.png)
