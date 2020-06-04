@@ -42,7 +42,7 @@ class FavoritesView extends Component {
     return (
       <SafeAreaView style={styles.container}>
         <Button
-          onPress={() => this.props.navigation.goBack()}
+          onPress={() => this.props.navigation.navigate('ProfileStack')}
           title='Back'
         />
         <FlatList
