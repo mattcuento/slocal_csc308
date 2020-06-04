@@ -39,8 +39,8 @@ class LoginView extends Component {
       // Set JSON Web Token on success
       this.setState({ isLoading: false, isAuthorized: true })
       this.props.navigation.navigate('Main', {
-                    username: this.state.user
-                  })
+        username: this.state.user
+      })
     }
 
     const onFailure = error => {
