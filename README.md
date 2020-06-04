@@ -37,8 +37,8 @@ TBD...
 
 ## Front End
 
-![Front Static Report](/images/logo.png)
+![Front Static Report](/frontend.png)
 
 ## Back End
 
-![Back Static Report](/images/logo.png)
+![Back Static Report](/backend.png)
