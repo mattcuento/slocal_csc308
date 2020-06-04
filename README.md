@@ -35,7 +35,11 @@ Since our application does no heavy calculations but relies heavily on connectio
 
 ## Acceptance Testing
 
-Checkout cypress-testing branch (note: other branches will not work) and run the following code in your terminal:
+Go into the slo_explore_backend directory that was previous cloned and run the following command to get the backend running:
+
+     npm start
+
+Checkout cypress-testing branch in the csc308outdoors project directory (note: other branches will not work) and run the following code in your terminal:
 
      npm run cypress:open
      
