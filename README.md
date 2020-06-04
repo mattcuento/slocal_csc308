@@ -67,7 +67,7 @@ Landing Tests Results
 
 Authentication Tests Results
 
-![Authentication Tests](/Authentication_Acceptance_Tests.png)
+![Authentication Tests](/Auth_Acceptance_Tests.png)
 
 Navigation Tests Results
 
