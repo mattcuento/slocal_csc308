@@ -35,17 +35,17 @@ Since our application does no heavy calculations but relies heavily on connectio
 
 ## Acceptance Testing
 
-Checkout cypress-testing branch and run the following code in your terminal:
+Checkout cypress-testing branch (note: other branches will not work)and run the following code in your terminal:
 
-     npm run cypress:open
+npm run cypress:open
      
   The Cypress app will then open. Click on the test file in Cypress and allow the tests to run
       
-or 
+          or 
           
-     npx cypress run
+npx cypress run
       
-  The test results will then appear in your terminal
+   The test results will then appear in your terminal
      
 
 Below are the Gherkin Language of each scenario that we tested
