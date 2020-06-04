@@ -35,7 +35,7 @@ Since our application does no heavy calculations but relies heavily on connectio
 
 ## Acceptance Testing
 
-Checkout cypress-testing branch (note: other branches will not work)and run the following code in your terminal:
+Checkout cypress-testing branch (note: other branches will not work) and run the following code in your terminal:
 
 npm run cypress:open
      
