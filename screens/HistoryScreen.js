@@ -1,11 +1,12 @@
 import React from 'react'
 import { ScrollView, StyleSheet } from 'react-native'
-import HistoryView from '../components/HistoryView'
+// import HistoryView from '../components/HistoryView'
+import ListView from '../components/ListView'
 
 export default function HistoryScreen () {
   return (
     <ScrollView style={styles.container}>
-      <HistoryView/>
+      <ListView/>
     </ScrollView>
   )
 }
