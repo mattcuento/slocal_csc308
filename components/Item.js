@@ -9,7 +9,7 @@ import { Card } from 'react-native-elements'
 
 class Item extends Component {
   render () {
-    const { navigation } = this.props    
+    const { navigation } = this.props
     return (
       <Card>
         <TouchableOpacity
