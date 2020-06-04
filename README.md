@@ -62,13 +62,13 @@ https://docs.google.com/document/d/10YGkEBrYtVoi8otoQB1qvO0E4qMtMo_NWBCawcyytlw/
 Here are the results of running the acceptance tests:
 
 Landing Tests Results
-/Landing_Acceptance_Tests.png
+![Landing Tests](/Landing_Acceptance_Tests.png)
 
 Authentication Tests Results
-/Authentication_Acceptance_Tests.png
+![Authentication Tests](/Authentication_Acceptance_Tests.png)
 
 Navigation Tests Results
-/Navigation_Acceptance_Tests.png
+![Navigation Tests](/Navigation_Acceptance_Tests.png)
 
 
 # Static Code Analyis
