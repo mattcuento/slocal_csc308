@@ -46,7 +46,10 @@ Checkout cypress-testing branch (note: other branches will not work) and run the
      npx cypress run
       
    The test results will then appear in your terminal
+
+You can view the test code by following this path:
      
+     csc308outdoors/cypress/integration/sample_spec.js
 
 Below are the Gherkin Language of each scenario that we tested
 
